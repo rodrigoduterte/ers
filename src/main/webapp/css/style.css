@@ -1,0 +1,15 @@
+body {
+	background-image: url("../pics/beach.jpg");
+}
+
+#cardlogin {
+	margin: 100 auto; /* Added */
+	float: none; /* Added */
+	margin-top: 100px; /* Added */
+	max-width: 600px;
+/* 	height: 500px; */
+}
+
+#carddeck {
+	margin-top: 100px; /* Added */
+}
