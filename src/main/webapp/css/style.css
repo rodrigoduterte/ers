@@ -1,5 +1,5 @@
 body {
-	background-image: url("../pics/beach.jpg");
+	background-image: url("../pics/art.jpg");
 }
 
 #cardlogin {
@@ -11,5 +11,26 @@ body {
 }
 
 #carddeck {
-	margin-top: 100px; /* Added */
+	margin-top: 150px; /* Added */
+	width: 1000px;
+	height: 300px;
 }
+
+img {
+	width: 250px;
+	height: 400px;
+}
+
+/* #info { */
+/* 	background-image: url("../pics/edit.png"); */
+/* 	height: 300px; */
+/* } */
+
+/* #history { */
+/* 	background-image: url("../pics/history.png"); */
+/* } */
+
+/* #request { */
+/* 	background-image: url("../pics/submit.png"); */
+/* } */
+
