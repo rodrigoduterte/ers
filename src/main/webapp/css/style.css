@@ -11,9 +11,17 @@ body {
 }
 
 #carddeck {
-	margin-top: 150px; /* Added */
+/* 	column-break-inside: avoid; */
+	margin-top: 150px;
+	margin-left: 170px;
 	width: 1000px;
 	height: 300px;
+}
+
+#accordion {
+	margin-left: 200px;
+	margin-top: 50px;
+	width: 900px;
 }
 
 img {
@@ -21,16 +29,4 @@ img {
 	height: 400px;
 }
 
-/* #info { */
-/* 	background-image: url("../pics/edit.png"); */
-/* 	height: 300px; */
-/* } */
-
-/* #history { */
-/* 	background-image: url("../pics/history.png"); */
-/* } */
-
-/* #request { */
-/* 	background-image: url("../pics/submit.png"); */
-/* } */
 

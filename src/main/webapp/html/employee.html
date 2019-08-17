@@ -9,35 +9,214 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/style.css">
+<link
+	href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.css">
+
 </head>
 <body>
 	<div class="card-deck" id="carddeck">
-		<div class="card">
-		<a href="#">
-			<div class="card-body" id="history">
-				<h5 class="card-title">View Past Tickets</h5>
-				<img src="../pics/history.png" class="img-fluid" alt="Sample photo">
-			</div>
-		</a>
+		<div class="card bg-success">
+			<a href="#" data-toggle="modal" data-target="#historyModal">
+				<div class="card-body" id="history">
+					<h5 class="card-title">View Past Tickets</h5>
+					<img src="../pics/history.png" class="img-fluid" alt="Sample photo">
+				</div>
+			</a>
 		</div>
-		<div class="card">
-		<a href="#">
-			<div class="card-body" id="request">
-				<h5 class="card-title">Reimbursement Request</h5>
-				<img src="../pics/submit.png" class="img-fluid" alt="Sample photo">
-			</div>
-		</a>
+		<div class="card bg-secondary">
+			<a href="#" data-toggle="modal" data-target="#requestModal">
+				<div class="card-body" id="request">
+					<h5 class="card-title">Reimbursement Request</h5>
+					<img src="../pics/submit.png" class="img-fluid" alt="Sample photo">
+				</div>
+			</a>
 		</div>
-		<div class="card">
-		<a href="#">
-			<div class="card-body" id="info">
-				<h5 class="card-title">Edit My Information</h5>
-				<img src="../pics/edit.png" class="img-fluid" alt="Sample photo">
-			</div>
-		</a>
+		<div class="card bg-warning">
+			<a href="#" data-toggle="modal" data-target="#infoModal">
+				<div class="card-body" id="info">
+					<h5 class="card-title">Edit My Information</h5>
+					<img src="../pics/edit.png" class="img-fluid" alt="Sample photo">
+				</div>
+			</a>
+		</div>
+		<div class="card bg-danger">
+			<a href="#" data-toggle="modal" data-target="#logOutModal">
+				<div class="card-body" id="logout">
+					<h5 class="card-title">Log out</h5>
+					<img src="../pics/edit.png" class="img-fluid" alt="Sample photo">
+				</div>
+			</a>
 		</div>
 	</div>
-	
+
+
+
+	<!-- Modal -->
+	<div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">My Past Tickets</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<table>
+						
+						
+						
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="requestModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Submit Reimbursement Request</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<!-- must be disabled and provide the exact date of request -->
+							<input type="text" class="form-control" id="date-request"
+								placeholder="" readonly>
+						</div>
+						<div class="form-group">
+							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholeder="Description"></textarea>
+						</div>
+						<!-- <div class="form-group">
+							<input type="text" class="form-control" id="type-request"
+								placeholder="Type">
+						</div> -->
+						<div class="form-group">
+							<label for="reimb-type">Select Type of Reimbursement:</label>
+							<select class="form-control" id="type-request">
+							  <optgroup label="Business Expense">
+								  <option>Business supplies</option>
+								  <option>Business tools</option>
+								  <option>Business travel</option>
+								  <option>Education or training</option>
+								  <option>Miscellaneous business-related</option>
+							  </optgroup>
+							  <optgroup label="Auto Mileage and Travel">
+								  <option>Standard Mileage Rates</option>
+								  <option>Per Diem Travel</option>
+							  </optgroup>
+							  <optgroup label="Medical Expense">
+								  <option>Health Savings Accounts (HSAs)</option>
+								  <option>Health Reimbursement Arrangements (HRAs)</option>
+								  <option>Health Flexible Spending Accounts (FSAs)</option>
+								  <option>A taxable "stipend" for health insurance</option>
+							  </optgroup>
+							</select>
+						  </div>
+						<div class="form-group">
+							<input type="text" class="form-control"
+								id="amount-request" placeholder="Amount">
+						</div>
+					</form>
+
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<!-- Edit My Information -->
+				<div class="modal-body">
+					<form>
+						<div class="form-group">
+							<input type="text" class="form-control" id="firstname-info"
+								placeholder="Firstname">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="lastname-info"
+								placeholder="Lastname">
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" id="email-info"
+								placeholder="Email">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="username-info"
+								placeholder="Username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control"
+								id="new-password-info" placeholder="New Password">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control"
+								id="conf-new-password-info" placeholder="Confirm New Password">
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" id="">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal -->
+	<div class="modal fade" id="logOutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">...</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
