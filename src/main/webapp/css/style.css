@@ -10,8 +10,7 @@ body {
 /* 	height: 500px; */
 }
 
-#carddeck {
-/* 	column-break-inside: avoid; */
+.card-deck {
 	margin-top: 150px;
 	margin-left: 170px;
 	width: 1000px;
