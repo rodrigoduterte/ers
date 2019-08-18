@@ -1,8 +1,10 @@
 package Main;
 
+import org.apache.log4j.Logger;
 import DAO.UserDAOImpl;
 
 public class User {
+	protected final static Logger ibis = Logger.getLogger(User.class);
 	private int id;
 	private String username;
 	private String password;
@@ -37,6 +39,8 @@ public class User {
 		this.role = role.toUpperCase();
 		udao.create(this);
 		this.id = udao.retrieve();
+		ibis.info("New user registered:\n\tName: " + this.firstName + " " + this.lastName + "\n\tUsername: "
+				+ this.username + "\n\tEmail: " + this.email + "\n\tID Number: " + this.id + "\n\tRole: " + this.role);
 	}
 
 	public int getId() {
@@ -80,6 +84,7 @@ public class User {
 		 */
 		firstName = newName;
 		udao.save(this);
+		ibis.info("ID # " + this.id + "changed their First Name to " + this.firstName);
 	}
 
 	public void changeLastName(String newName) {
@@ -88,6 +93,7 @@ public class User {
 		 */
 		lastName = newName;
 		udao.save(this);
+		ibis.info("ID # " + this.id + "changed their Last Name to " + this.lastName);
 	}
 
 	public void changeUsername(String newName) {
@@ -96,6 +102,7 @@ public class User {
 		 */
 		username = newName;
 		udao.save(this);
+		ibis.info("ID # " + this.id + "changed their username to " + this.username);
 	}
 
 	public void changePassword(String newPassword) {
@@ -104,6 +111,7 @@ public class User {
 		 */
 		password = newPassword;
 		udao.save(this);
+		ibis.info("ID # " + this.id + "changed their Password to " + this.password);
 	}
 
 	public void changeEmail(String newEmail) {
@@ -112,6 +120,7 @@ public class User {
 		 */
 		email = newEmail;
 		udao.save(this);
+		ibis.info("ID # " + this.id + "changed their Email to " + this.email);
 	}
 
 	@Override
@@ -120,4 +129,24 @@ public class User {
 				+ ", lastName=" + lastName + ", email=" + email + ", role=" + role + "]";
 	}
 
+	public String getName() {
+		/**
+		 * Gets the user's full name
+		 */
+		return (this.firstName + " " + this.lastName);
+	}
+	
+	public void logSignIn() {
+		/**
+		 * Call to log a user signing in
+		 */
+		ibis.info(this.getName()+" signed in");
+	}
+	
+	public void logSignOut() {
+		/**
+		 * Call to log a user signing out
+		 */
+		ibis.info(this.getName()+" signed out");
+	}
 }

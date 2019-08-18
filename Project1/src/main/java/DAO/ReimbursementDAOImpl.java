@@ -5,11 +5,12 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
+import org.apache.log4j.Logger;
 import Main.Reimbursement;
 import Main.User;
 
 public class ReimbursementDAOImpl implements ReimbursementDAO {
+	protected final static Logger ibis = Logger.getLogger(User.class);
 
 	@Override
 	public Reimbursement getReimbursement(int id) {
@@ -42,7 +43,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	@Override
 	public void approve(User user, Reimbursement reimb) {
 		/**
-		 * Approves specified ticket, and labels the specified user as the one who resolved it
+		 * Approves specified ticket, and labels the specified user as the one who
+		 * resolved it
 		 */
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
@@ -52,6 +54,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			prep.setInt(1, user.getId());
 			prep.executeUpdate();
 			prep.cancel();
+			ibis.info("Ticket #" + reimb.getId() + " approved by " + user.getName());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -60,7 +63,8 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 	@Override
 	public void deny(User user, Reimbursement reimb) {
 		/**
-		 * Denies specified ticket, and labels the specified user as the one who resolved it
+		 * Denies specified ticket, and labels the specified user as the one who
+		 * resolved it
 		 */
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
@@ -70,6 +74,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			prep.setInt(1, user.getId());
 			prep.executeUpdate();
 			prep.cancel();
+			ibis.info("Ticket #" + reimb.getId() + " denied by " + user.getName());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -265,6 +270,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			call.setInt(1, user.getId());
 			call.execute();
 			call.cancel();
+			ibis.info("All pending tickets approved by " + user.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -281,6 +287,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 			call.setInt(1, user.getId());
 			call.execute();
 			call.cancel();
+			ibis.info("All pending tickets denied by " + user.getName());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
