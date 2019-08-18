@@ -2,10 +2,11 @@ package Main;
 
 import java.sql.Blob;
 import java.sql.Date;
-
+import org.apache.log4j.Logger;
 import DAO.ReimbursementDAOImpl;
 
 public class Reimbursement {
+	protected final static Logger ibis = Logger.getLogger(User.class);
 	private Date created;
 	private Date resolved;
 	private int id;
@@ -29,6 +30,9 @@ public class Reimbursement {
 		this.author = author;
 		this.type = type.toUpperCase();
 		rdao.create(this, author);
+		this.id = rdao.retrieve();
+		ibis.info("New Reimbursement ticket opened by " + this.author.getName() + "\n\tNumber: " + this.id
+				+ "\n\tAmmount: $" + this.ammount + "\n\tType: " + this.type + "\n\tDescription: " + this.description);
 	}
 
 	public Reimbursement(Date created, int id, double ammount, String description, Blob receipt, User author,
