@@ -19,7 +19,7 @@ public class User {
 		super();
 		this.id = id;
 		this.username = username;
-		this.password = password;
+		this.password = Crypt.decryptWord(password);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -32,7 +32,7 @@ public class User {
 		 */
 		super();
 		this.username = username;
-		this.password = password;
+		this.password = Crypt.encryptWord(password);
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -83,8 +83,10 @@ public class User {
 		 * changes the user's first name
 		 */
 		firstName = newName;
+		password = Crypt.encryptWord(password);
 		udao.save(this);
-		ibis.info("ID # " + this.id + "changed their First Name to " + this.firstName);
+		password = Crypt.decryptWord(password);
+		ibis.info("ID # " + id + "changed their First Name to " + firstName);
 	}
 
 	public void changeLastName(String newName) {
@@ -92,8 +94,10 @@ public class User {
 		 * changes the user's last name
 		 */
 		lastName = newName;
+		password = Crypt.encryptWord(password);
 		udao.save(this);
-		ibis.info("ID # " + this.id + "changed their Last Name to " + this.lastName);
+		password = Crypt.decryptWord(password);
+		ibis.info("ID # " + id + "changed their Last Name to " + lastName);
 	}
 
 	public void changeUsername(String newName) {
@@ -101,17 +105,20 @@ public class User {
 		 * changes the user's username
 		 */
 		username = newName;
+		password = Crypt.encryptWord(password);
 		udao.save(this);
-		ibis.info("ID # " + this.id + "changed their username to " + this.username);
+		password = Crypt.decryptWord(password);
+		ibis.info("ID # " + id + "changed their username to " + username);
 	}
 
 	public void changePassword(String newPassword) {
 		/**
 		 * changes the user's password
 		 */
-		password = newPassword;
+		password = Crypt.encryptWord(newPassword);
 		udao.save(this);
-		ibis.info("ID # " + this.id + "changed their Password to " + this.password);
+		password = Crypt.decryptWord(password);
+		ibis.info("ID # " + id + "changed their Password");
 	}
 
 	public void changeEmail(String newEmail) {
@@ -119,8 +126,10 @@ public class User {
 		 * changes the user's email
 		 */
 		email = newEmail;
+		password = Crypt.encryptWord(password);
 		udao.save(this);
-		ibis.info("ID # " + this.id + "changed their Email to " + this.email);
+		password = Crypt.decryptWord(password);
+		ibis.info("ID # " + id + "changed their Email to " + email);
 	}
 
 	@Override
@@ -133,20 +142,20 @@ public class User {
 		/**
 		 * Gets the user's full name
 		 */
-		return (this.firstName + " " + this.lastName);
+		return (firstName + " " + lastName);
 	}
-	
+
 	public void logSignIn() {
 		/**
 		 * Call to log a user signing in
 		 */
-		ibis.info(this.getName()+" signed in");
+		ibis.info(this.getName() + " signed in");
 	}
-	
+
 	public void logSignOut() {
 		/**
 		 * Call to log a user signing out
 		 */
-		ibis.info(this.getName()+" signed out");
+		ibis.info(this.getName() + " signed out");
 	}
 }
