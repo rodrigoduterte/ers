@@ -32,12 +32,83 @@
 					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 					aria-haspopup="true" aria-expanded="false">Admin</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#">Edit Information</a> <a
-							class="dropdown-item" href="#">Log out</a>
+						<a class="dropdown-item" href="#" data-toggle="modal"
+							data-target="#infoModal">Edit Information</a> <a
+							class="dropdown-item" href="#" data-toggle="modal" data-target="#logOutModal">Log out</a>
 					</div></li>
 			</ul>
 		</div>
 	</nav>
+
+	<!-- Modal -->
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLongTitle">Edit My
+						Information</h5>
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<!-- Edit My Information -->
+				<div class="modal-body">
+					<form action="/user/info" method="POST" id="edit-form">
+						<div class="form-group">
+							<input type="text" class="form-control" id="firstname-register"
+								placeholder="Firstname" name="fnameReg">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="lastname-register"
+								placeholder="Lastname" name="lnameReg">
+						</div>
+						<div class="form-group">
+							<input type="email" class="form-control" id="email-register"
+								placeholder="Email" name="emailReg">
+						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="username-register"
+								placeholder="Username" name="unReg">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control"
+								id="password-register" placeholder="New Password" name="pwReg">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control"
+								id="conf-password-register" placeholder="Confirm New Password"
+								name="cpwReg">
+						</div>
+						<div class="form-group">
+							<input type="button" class="btn btn-primary"
+								id="edit-form-button" value="Update">
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="logOutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<h5 class="modal-title" id="exampleModalLongTitle">Are you
+						sure you want to log out?</h5>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary">Yes</button>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">No</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<div id="accordion">
 		<div class="card">
@@ -55,8 +126,7 @@
 					<table data-toggle="table table-condensed" data-search="true"
 						id="open-req-table" data-show-columns="true"
 						class="table-bordered table-striped overflow-auto"
-						 data-height="200"
-						 data-width="900">
+						data-height="200" data-width="900">
 						<thead>
 							<tr class="d-flex">
 								<th data-sortable="true" data-checkbox="true">Approve</th>
@@ -177,8 +247,7 @@
 				<div class="card-body">
 					<table data-toggle="table table-condensed" data-search="true"
 						id="req-hist-table" data-show-columns="true"
-						class="table-bordered table-striped"
-						data-height="200"
+						class="table-bordered table-striped" data-height="200"
 						data-width="900">
 						<thead>
 							<tr>
@@ -239,17 +308,18 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-<!-- 	<script src="https://www.w3schools.com/lib/w3.js"></script> -->
-<!-- 	<script -->
-<!-- 		src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script> -->
-<!-- 	<script -->
-<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.js"></script> -->
+	<!-- 	<script src="https://www.w3schools.com/lib/w3.js"></script> -->
+	<!-- 	<script -->
+	<!-- 		src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script> -->
+	<!-- 	<script -->
+	<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.js"></script> -->
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 
-<!-- 	<script -->
-<!-- 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script> -->
-	<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+	<!-- 	<script -->
+	<!-- 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script> -->
+	<script
+		src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
 	<script src="../js/manager.js"></script>

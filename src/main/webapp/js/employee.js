@@ -15,9 +15,12 @@ $employeeRequestTbl.bootstrapTable();
 
 // do ajax for sending employee request from the table
 
-let requestModal = document.getElementById('requestButton');
+let editBtn = document.getElementById('edit-form-button');
 
-requestModal.addEventListener('click', function(){
-    getFormData(json, url) 
+editBtn.addEventListener('click', function(){
+	let editForm = document.forms['edit-form'];
+	let json = JSON.stringify(  Object.fromEntries(new FormData(editForm))  );
+	console.log( json );
+	setFormData( json, "http://localhost:8081/ers/user/info");
 });
 
