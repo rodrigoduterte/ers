@@ -7,9 +7,13 @@ $mgClosedReqTable.bootstrapTable();
 
 /// do ajax for all open and closed requests that go to the tables
 
-//tableLoad($mgOpenReqTable, "https://localhost:8070/managers/reim/open", processTableData);
-//tableLoad($mgClosedReqTable, "https://localhost:8070/managers/reim/closed", processTableData);
+
 let editBtn = document.getElementById('edit-form-button');
+
+window.addEventListener('load',function() {
+	tableLoad($mgOpenReqTable, "http://localhost:8081/ers/manager/reqs/all?open=true", processTableData);
+	tableLoad($mgClosedReqTable, "http://localhost:8081/ers/manager/reqs/all?open=false", processTableData);
+});
 
 editBtn.addEventListener('click', function(){
 	let editForm = document.forms['edit-form'];

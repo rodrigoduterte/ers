@@ -4,7 +4,7 @@ function tableLoad(table, url, processor) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let json = JSON.parse(xhttp.responseText);
-            processTableData(table, json);
+            //processTableData(table, json);
         }
     };
     xhttp.open("GET", url, true);
@@ -15,7 +15,6 @@ function processTableData(json) {
     table.bootstrapTable({ data: json });
 }
 
-// tableLoad($managersOpenTbl, "https://localhost:8070/managers/reim/open", processTableData);
 
 function getFormData(json, url) {
     var xhttp = new XMLHttpRequest();
