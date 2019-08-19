@@ -27,4 +27,4 @@ bootstrapValidate(['#password-register', '#conf-password-register'], 'required:P
 //									'regex:.*[a-z].*:Must have at least one lowercase letter|' + 
 //									'regex:.*[0-9].*:Must have at least one number');
 
-bootstrapValidate('#conf-new-password-info','matches:#new-password-info:Your passwords should match');
+bootstrapValidate('#conf-password-register','matches:#password-register:Your passwords should match');

@@ -3,7 +3,7 @@ let today = new Date();
 
 dateRequest.setAttribute("placeholder", today.getMonth() + "/" + today.getDate() + "/" + today.getFullYear()) 
 
-let $employeeRequestTbl = $('#emp-req-table');
+let $employeeRequestTbl = $('emp-req-table');
 
 /// temp do bootstrapTable
 
