@@ -28,13 +28,13 @@ public class User {
 		this.role = role;
 	}
 
-	public User(String username, String password, String firstName, String lastName, String email, String role) {
+	public User(String username, String firstName, String lastName, String email, String role) {
 		/**
 		 * Used to instantiate a newly registered user and add it to the database
 		 */
 		super();
 		this.username = username;
-		this.password = Crypt.encryptWord(password);
+		this.password = Crypt.encryptWord(Temper.getTempString());
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -43,6 +43,7 @@ public class User {
 		this.id = udao.retrieve();
 		ibis.info("New user registered:\n\tName: " + this.firstName + " " + this.lastName + "\n\tUsername: "
 				+ this.username + "\n\tEmail: " + this.email + "\n\tID Number: " + this.id + "\n\tRole: " + this.role);
+		this.password=Crypt.decryptWord(this.password);
 	}
 
 	public int getId() {
