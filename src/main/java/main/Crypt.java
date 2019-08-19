@@ -1,8 +1,13 @@
 package main;
 
 import java.util.Random;
+/**
+ * Used to encrypt and decrypt a password
+ * @author devon
+ *
+ */
 
-public class Crypt {
+class Crypt {
 	
 	private Crypt() {
 		super();
