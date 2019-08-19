@@ -4,7 +4,11 @@
 let $mgOpenReqTable =  $('#open-req-table');
 let $mgClosedReqTable = $('#req-hist-table');
 
+/// temp do bootstrapTable
+$mgOpenReqTable.bootstrapTable();
+$mgClosedReqTable.bootstrapTable();
+
 /// do ajax for all open and closed requests that go to the tables
 
-tableLoad($mgOpenReqTable, "https://localhost:8070/managers/reim/open", processTableData);
-tableLoad($mgClosedReqTable, "https://localhost:8070/managers/reim/closed", processTableData);
+//tableLoad($mgOpenReqTable, "https://localhost:8070/managers/reim/open", processTableData);
+//tableLoad($mgClosedReqTable, "https://localhost:8070/managers/reim/closed", processTableData);

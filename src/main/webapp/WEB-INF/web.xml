@@ -9,4 +9,64 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>RegisterUser</display-name>
+    <servlet-name>RegisterUser</servlet-name>
+    <servlet-class>servlets.RegisterUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegisterUser</servlet-name>
+    <url-pattern>/register</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>LoginUser</display-name>
+    <servlet-name>LoginUser</servlet-name>
+    <servlet-class>servlets.LoginUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginUser</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserInfo</display-name>
+    <servlet-name>UserInfo</servlet-name>
+    <servlet-class>servlets.UserInfo</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserInfo</servlet-name>
+    <url-pattern>/user/info</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployeeRequest</display-name>
+    <servlet-name>EmployeeRequest</servlet-name>
+    <servlet-class>servlets.EmployeeRequest</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployeeRequest</servlet-name>
+    <url-pattern>/employee/req</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description>Retrieving all requests</description>
+    <display-name>Requests</display-name>
+    <servlet-name>Requests</servlet-name>
+    <servlet-class>servlets.Requests</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Requests</servlet-name>
+    <url-pattern>/manager/reqs/all</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RequestApproval</display-name>
+    <servlet-name>RequestApproval</servlet-name>
+    <servlet-class>servlets.RequestApproval</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RequestApproval</servlet-name>
+    <url-pattern>/manager/reqs/appr</url-pattern>
+  </servlet-mapping>
 </web-app>

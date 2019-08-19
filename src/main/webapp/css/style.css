@@ -10,6 +10,11 @@ body {
 /* 	height: 500px; */
 }
 
+/* #historyModal { */
+/* 	width: 700px; */
+/* } */
+
+
 .card-deck {
 	margin-top: 150px;
 	margin-left: 170px;
@@ -20,12 +25,12 @@ body {
 #accordion {
 	margin-left: 200px;
 	margin-top: 50px;
-	width: 900px;
+	width: 1000px;
 }
+
 
 img {
 	width: 250px;
 	height: 400px;
 }
-
 

@@ -14,7 +14,7 @@
 	rel="stylesheet">
 <link rel="stylesheet" type="text/css"
 	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.css">
-
+<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
 </head>
 <body>
 	<div class="card-deck" id="carddeck">
@@ -57,10 +57,11 @@
 	<!-- Modal -->
 	<div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
 		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog mw-100 w-75" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">My Past Tickets</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">My Past
+						Tickets</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -69,7 +70,9 @@
 				<div class="modal-body">
 					<table data-toggle="table table-condensed" data-search="true"
 						id="emp-req-table" data-show-columns="true"
-						class="table-bordered table-striped">
+						class="table-bordered table-striped overflow-auto"
+						data-height="200"
+						data-width="900">
 						<thead>
 							<tr class="d-flex">
 								<th data-sortable="true">Request Status</th>
@@ -112,12 +115,45 @@
 								<td>HSA</td>
 								<td>10,000.00</td>
 							</tr>
+
+
+							<tr id="tr-id-1" class="tr-class-1" data-title="bootstrap table"
+								data-object='{"key": "value"}'>
+								<td></td>
+								<td>12/22/2018</td>
+								<td data-i18n="Description">Plane ticket to Seattle
+									bbbbbbbbbbbbbbb nnnnnnnnnnnnnn nnnnnnnnnnnnnnnn
+									nnnnnnnnnnnnnnnnn</td>
+								<td>Michael</td>
+								<td>Business travel</td>
+								<td>400.00</td>
+							</tr>
+							<tr id="tr-id-2" class="tr-class-2" data-title="bootstrap table"
+								data-object='{"key": "value"}'>
+								<td></td>
+								<td>01/22/2019</td>
+								<td data-i18n="Description">Software Developer Training</td>
+								<td>Richard</td>
+								<td>Training</td>
+								<td>4,000.00</td>
+							</tr>
+							<tr id="tr-id-3" class="tr-class-3" data-title="bootstrap table"
+								data-object='{"key": "value"}'>
+								<td></td>
+								<td>01/22/2019</td>
+								<td data-i18n="Description">Fees for Surgery</td>
+								<td>Lisa</td>
+								<td>HSA</td>
+								<td>10,000.00</td>
+							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Export to PDF</button>
-					<button type="button" class="btn btn-primary">Export to CSV</button>
+					<button type="button" class="btn btn-primary">Export to
+						PDF</button>
+					<button type="button" class="btn btn-primary">Export to
+						CSV</button>
 				</div>
 			</div>
 		</div>
@@ -129,7 +165,8 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">My Reimbursement Request</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">My
+						Reimbursement Request</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -143,34 +180,39 @@
 								placeholder="" readonly>
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholeder="Description"></textarea>
+							<textarea class="form-control" id="exampleFormControlTextarea1"
+								rows="3" placeholeder="Description"></textarea>
 						</div>
 						<div class="form-group">
-							<label for="reimb-type">Select Type of Reimbursement:</label>
-							<select class="form-control" id="type-request">
-							  <optgroup label="Business Expense">
-								  <option>Business supplies</option>
-								  <option>Business tools</option>
-								  <option>Business travel</option>
-								  <option>Education or training</option>
-								  <option>Miscellaneous business-related</option>
-							  </optgroup>
-							  <optgroup label="Auto Mileage and Travel">
-								  <option>Standard Mileage Rates</option>
-								  <option>Per Diem Travel</option>
-							  </optgroup>
-							  <optgroup label="Medical Expense">
-								  <option>Health Savings Accounts (HSAs)</option>
-								  <option>Health Reimbursement Arrangements (HRAs)</option>
-								  <option>Health Flexible Spending Accounts (FSAs)</option>
-								  <option>A taxable "stipend" for health insurance</option>
-							  </optgroup>
+							<label for="reimb-type">Select Type of Reimbursement:</label> <select
+								class="form-control" id="type-request">
+								<optgroup label="Business Expense">
+									<option>Business supplies</option>
+									<option>Business tools</option>
+									<option>Business travel</option>
+									<option>Education or training</option>
+									<option>Miscellaneous business-related</option>
+								</optgroup>
+								<optgroup label="Auto Mileage and Travel">
+									<option>Standard Mileage Rates</option>
+									<option>Per Diem Travel</option>
+								</optgroup>
+								<optgroup label="Medical Expense">
+									<option>Health Savings Accounts (HSAs)</option>
+									<option>Health Reimbursement Arrangements (HRAs)</option>
+									<option>Health Flexible Spending Accounts (FSAs)</option>
+									<option>A taxable "stipend" for health insurance</option>
+								</optgroup>
 							</select>
-						  </div>
-						<div class="form-group">
-							<input type="text" class="form-control"
-								id="amount-request" placeholder="Amount">
 						</div>
+						<div class="form-group">
+							<input type="text" class="form-control" id="amount-request"
+								placeholder="Amount">
+						</div>
+						<div class="form-group">
+							<input id="image-file" type="file" class="form-control"/>
+						</div>
+
 					</form>
 
 				</div>
@@ -187,7 +229,8 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Edit My Information</h5>
+					<h5 class="modal-title" id="exampleModalLongTitle">Edit My
+						Information</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -196,30 +239,30 @@
 
 				<!-- Edit My Information -->
 				<div class="modal-body">
-					<form>
+					<form action="/user/info" method="POST">
 						<div class="form-group">
-							<input type="text" class="form-control" id="firstname-info"
+							<input type="text" class="form-control" id="firstname-register"
 								placeholder="Firstname">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="lastname-info"
+							<input type="text" class="form-control" id="lastname-register"
 								placeholder="Lastname">
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control" id="email-info"
+							<input type="email" class="form-control" id="email-register"
 								placeholder="Email">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="username-info"
+							<input type="text" class="form-control" id="username-register"
 								placeholder="Username">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control"
-								id="new-password-info" placeholder="New Password">
+								id="password-register" placeholder="New Password">
 						</div>
 						<div class="form-group">
 							<input type="password" class="form-control"
-								id="conf-new-password-info" placeholder="Confirm New Password">
+								id="conf-password-register" placeholder="Confirm New Password">
 						</div>
 					</form>
 				</div>
@@ -235,12 +278,13 @@
 		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLongTitle">Are you sure you want to log out?</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
+				<div class="modal-body">
+					<h5 class="modal-title" id="exampleModalLongTitle">Are you
+						sure you want to log out?</h5>
+<!-- 					<button type="button" class="close" data-dismiss="modal" -->
+<!-- 						aria-label="Close"> -->
+<!-- 						<span aria-hidden="true">&times;</span> -->
+<!-- 					</button> -->
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary">Yes</button>
@@ -262,15 +306,15 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-		
+	<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
-
-<!-- 	<script -->
-<!-- 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script> -->
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+	
+	<script src="../js/validator.js"></script>
 	<script src="../js/ajax.js"></script>
 	<script src="../js/employee.js"></script>
+	
 </body>
 </html>

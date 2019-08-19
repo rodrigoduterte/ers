@@ -10,6 +10,7 @@
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="../css/style.css">
+<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
 </head>
 
 <body>
@@ -35,63 +36,65 @@
 						<div class="tab-content" id="nav-tabContent">
 							<div class="tab-pane fade show active" id="nav-home"
 								role="tabpanel" aria-labelledby="nav-home-tab">
-								<form>
+								<form action="/login" method="POST">
 									<div class="form-group">
 										<div class="col">
 											<input type="text" class="form-control"
-												placeholder="Username" id="usernameField">
+												placeholder="Username" id="username-login" name="unLogin">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
 											<input type="password" class="form-control"
-												placeholder="Password" id="passwordField">
+												placeholder="Password" id="password-login" name="pwLogin">
 										</div>
 									</div>
-									<button type="button" class="btn btn-primary">Sign In</button>
+									<input type="submit" value="Sign In" class="btn btn-primary" id="button-login">
 								</form>
 							</div>
+							
+							
 							<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 								aria-labelledby="nav-profile-tab">
-								<form>
+								<form action="/register" method="POST">
 									<div class="form-group">
 										<div class="col">
 											<input type="text" class="form-control"
-												placeholder="Firstname" id="firstnameField">
+												placeholder="Firstname" id="firstname-register" name="fnameReg">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
 											<input type="text" class="form-control"
-												placeholder="Lastname" id="lastnameField">
+												placeholder="Lastname" id="lastname-register" name="lnameReg">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
 											<input type="email" class="form-control"
-												placeholder="Email" id="emailField">
+												placeholder="Email" id="email-register" name="emailReg">
 										</div>
 									</div>
 									
 									<div class="form-group">
 										<div class="col">
 											<input type="text" class="form-control"
-												placeholder="Username" id="usernameField">
+												placeholder="Username" id="username-register" name="unReg">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
 											<input type="password" class="form-control"
-												placeholder="Password" id="passwordField">
+												placeholder="Password" id="password-register" name="pwReg">
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
 											<input type="password" class="form-control"
-												placeholder="Confirm Password" id="confPasswordField">
+												placeholder="Confirm Password" id="conf-password-register" name="cpwReg">
 										</div>
 									</div>
-									<button type="button" class="btn btn-primary">Register</button>
+									<input type="submit" value="Register" class="btn btn-primary">
 								</form>
 							</div>
 						</div>
@@ -116,6 +119,9 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+	
+	<script src="../js/validator.js"></script>
+	<script src="../js/login.js"></script>
 </body>
 
 </html>
