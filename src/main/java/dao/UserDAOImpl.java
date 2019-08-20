@@ -169,18 +169,4 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return false;
 	}
-	
-	public static void main(String[] args) {
-		UserDAOImpl udao = new UserDAOImpl();
-		udao.create(new User("pgolding0","Pris","Golding","pgolding0@npr.org","EMPLOYEE"));
-		udao.create(new User("rpettitt1","Rooney","Pettitt","rpettitt1@baidu.com","EMPLOYEE"));
-		udao.create(new User("snardi2","Sarajane","Nardi","snardi2@buzzfeed.com","EMPLOYEE"));
-		udao.create(new User("hdymock3","Hephzibah","Dymock","hdymock3@redcross.org","EMPLOYEE"));
-		udao.create(new User("egerbel4","Elenore","Gerbel","egerbel4@angelfire.com","EMPLOYEE"));
-		udao.create(new User("emoran5","Edna","Moran","emoran5@ft.com","FINANCE MANAGER"));
-		udao.create(new User("graynor6","Graig","Raynor","graynor6@chron.com","FINANCE MANAGER"));
-		udao.create(new User("sarkell7","Sheena","Arkell","sarkell7@instagram.com","EMPLOYEE"));
-		udao.create(new User("rspringate8","Rudie","Springate","rspringate8@opensource.org","EMPLOYEE"));
-		udao.create(new User("gpatterson9","Gottfried","Patterson","gpatterson9@statcounter.com","EMPLOYEE"));
-	}
 }
