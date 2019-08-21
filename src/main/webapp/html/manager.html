@@ -1,56 +1,53 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="ISO-8859-1">
-<title>Manager Page</title>
+	<meta charset="ISO-8859-1">
+	<title>Manager Page</title>
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<link rel="stylesheet" href="../css/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="../css/style.css">
 
-<link
-	href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css"
-	rel="stylesheet">
-<link rel="stylesheet" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.css">
-<!-- <script -->
-<!-- 	src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script> -->
+	<link href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css"
+		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.css">
+	<!-- <script -->
+	<!-- 	src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script> -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 </head>
+
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#">Navbar</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-			aria-expanded="false" aria-label="Toggle navigation">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+			aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNavDropdown">
 			<ul class="navbar-nav">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#"
-					id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false">Admin</a>
+				<li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+						role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
 					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-						<a class="dropdown-item" href="#" data-toggle="modal"
-							data-target="#infoModal">Edit Information</a> <a
-							class="dropdown-item" href="#" data-toggle="modal" data-target="#logOutModal">Log out</a>
-					</div></li>
+						<a class="dropdown-item" href="#" data-toggle="modal" data-target="#infoModal">Edit
+							Information</a> <a class="dropdown-item" href="#" data-toggle="modal"
+							data-target="#logOutModal">Log out</a>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</nav>
 
 	<!-- Modal -->
-	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">Edit My
 						Information</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -59,43 +56,41 @@
 				<div class="modal-body">
 					<form action="/user/info" method="POST" id="edit-form">
 						<div class="form-group">
-							<input type="text" class="form-control" id="firstname-register"
-								placeholder="Firstname" name="fnameReg">
+							<input type="text" class="form-control" id="firstname-register" placeholder="Firstname"
+								name="fnameReg">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="lastname-register"
-								placeholder="Lastname" name="lnameReg">
+							<input type="text" class="form-control" id="lastname-register" placeholder="Lastname"
+								name="lnameReg">
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control" id="email-register"
-								placeholder="Email" name="emailReg">
+							<input type="email" class="form-control" id="email-register" placeholder="Email"
+								name="emailReg">
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="username-register"
-								placeholder="Username" name="unReg">
+							<input type="text" class="form-control" id="username-register" placeholder="Username"
+								name="unReg">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control"
-								id="password-register" placeholder="New Password" name="pwReg">
+							<input type="password" class="form-control" id="password-register"
+								placeholder="New Password" name="pwReg">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control"
-								id="conf-password-register" placeholder="Confirm New Password"
-								name="cpwReg">
+							<input type="password" class="form-control" id="conf-password-register"
+								placeholder="Confirm New Password" name="cpwReg">
 						</div>
 						<div class="form-group">
-							<input type="button" class="btn btn-primary"
-								id="edit-form-button" value="Update">
+							<input type="button" class="btn btn-primary" id="edit-form-button" value="Update">
 						</div>
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
-	
+
 	<!-- Modal -->
-	<div class="modal fade" id="logOutModal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+	<div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
@@ -104,8 +99,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-primary">Yes</button>
-					<button type="button" class="btn btn-secondary"
-						data-dismiss="modal">No</button>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
 				</div>
 			</div>
 		</div>
@@ -115,19 +109,16 @@
 		<div class="card">
 			<div class="card-header" id="headingOne">
 				<h5 class="mb-0">
-					<button class="btn btn-link" data-toggle="collapse"
-						data-target="#collapseOne" aria-expanded="true"
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
 						aria-controls="collapseOne">View Open Requests</button>
 				</h5>
 			</div>
 
-			<div id="collapseOne" class="collapse" aria-labelledby="headingOne"
-				data-parent="#accordion">
+			<div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
 				<div class="card-body">
-					<table data-toggle="table table-condensed" data-search="true"
-						id="open-req-table" data-show-columns="true"
-						class="table-bordered table-striped overflow-auto"
-						data-height="200" data-width="900">
+					<table data-toggle="table table-condensed" data-search="true" id="open-req-table"
+						data-show-columns="true" class="table-bordered table-striped overflow-auto" data-height="200"
+						data-width="900">
 						<thead>
 							<tr class="d-flex">
 								<th data-sortable="true" data-checkbox="true">Approve</th>
@@ -237,18 +228,15 @@
 		<div class="card">
 			<div class="card-header" id="headingTwo">
 				<h5 class="mb-0">
-					<button class="btn btn-link" data-toggle="collapse"
-						data-target="#collapseTwo" aria-expanded="true"
+					<button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true"
 						aria-controls="#collapseTwo">View Requests History</button>
 				</h5>
 			</div>
 
-			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-				data-parent="#accordion">
+			<div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
 				<div class="card-body">
-					<table data-toggle="table table-condensed" data-search="true"
-						id="req-hist-table" data-show-columns="true"
-						class="table-bordered table-striped" data-height="200"
+					<table data-toggle="table table-condensed" data-search="true" id="req-hist-table"
+						data-show-columns="true" class="table-bordered table-striped" data-height="200"
 						data-width="900">
 						<thead>
 							<tr>
@@ -301,12 +289,10 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
 	<!-- 	<script src="https://www.w3schools.com/lib/w3.js"></script> -->
@@ -314,18 +300,18 @@
 	<!-- 		src="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.js"></script> -->
 	<!-- 	<script -->
 	<!-- 		src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.js"></script> -->
-	<script
-		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 
 	<!-- 	<script -->
 	<!-- 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter/bootstrap-table-filter.min.js"></script> -->
-	<script
-		src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+	<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
 	<script src="../js/validator.js"></script>
 	<script src="../js/ajax.js"></script>
 	<script src="../js/manager.js"></script>
 
 </body>
+
 </html>

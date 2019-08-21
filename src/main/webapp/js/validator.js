@@ -1,30 +1,60 @@
-/**
- * 
+/* register a custom validator fields */
+let unReg = document.getElementById('username-register');
+let cpReg = document.getElementById('conf-password-register');
+let pwReg = document.getElementById('password-register');
+
+if (unReg != null) {
+  hyperform.addValidator(unReg,
+    function (element) {
+      var re = new RegExp('^[a-zA-Z].*');
+      //element.value.match(re)
+      var valid = re.test(element.value);
+      element.setCustomValidity(valid ? ''
+        : 'Length must be between 5 to 15 characters, '
+        + 'Must start with a letter,'
+        + 'Please enter alphanumeric characters only');
+      return valid;
+    })
+}
+
+if (cpReg != null) {
+  hyperform.addValidator(cpReg,
+    function (element) {
+      var valid = element.value === pwReg.value;
+      element.setCustomValidity(valid ? ''
+        : 'The password does not match the control field.');
+      return valid;
+    });
+
+}
+
+if (pwReg != null) {
+  hyperform.addValidator(pwReg,
+    function (element) {
+      var re = new RegExp('^(?=.{5,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$');
+      //element.value.match(re)
+      var valid = re.test(element.value);
+      element.setCustomValidity(valid ? ''
+        : 'Length must be between 5 to 20 characters, '
+        + 'must have at least one uppercase letter,'
+        + 'at least one lowercase letter, and at least one lowercase letter');
+
+      console.log(valid);
+      return valid;
+    })
+  pwReg.addEventListener('keyup',
+    function () {
+      cpReg.reportValidity();
+    });
+}
+
+
+/*
+ * whenever the password field changes, revalidate the confirmation field, too
  */
 
-///employee
 
-bootstrapValidate(['#firstname-register', '#lastname-register'], 'required:Please fill out this field!|' +
-														 'alpha:Please enter alphabetic characters');
+/// custom error messages of each control
 
-bootstrapValidate('#email-register', 'email:Please give a valid email!|required:Please fill out this field!');
 
-bootstrapValidate('#username-register', 'required:Please fill out valid username!|' +
-									'regex:^[A-Za-z].*:Must start with letter|' +
-									'min:5:Length between 5 to 15 characters|' +
-									'max:15:Length between 5 to 15 characters|' +
-									'alphanum:Please enter alphanumeric characters');
-
-bootstrapValidate(['#password-register', '#conf-password-register'], 'required:Please fill out password|' +
-									'min:5:Length must be between 5 to 20 characters|' +
-									'max:20:Length must be between 5 to 20 characters|' +
-									'regex:^(?=.{5,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$:Must have at least one special character like @#$%^&+=!, \n'+
-									'at least one uppercase letter, '+
-									'at least one lowercase letter and\n'+
-									'at least one number');
-									//'regex:.*[!@#$%^&*(),.?":{}|<>].*:Must have at least one special character|'); //+
-//									'regex:.*[A-Z].*:Must have at least one uppercase letter|' + 
-//									'regex:.*[a-z].*:Must have at least one lowercase letter|' + 
-//									'regex:.*[0-9].*:Must have at least one number');
-
-bootstrapValidate('#conf-password-register','matches:#password-register:Your passwords should match');
+hyperform(window);

@@ -21,3 +21,19 @@ editBtn.addEventListener('click', function(){
 	console.log( json );
 	setFormData( json, "http://localhost:8081/ers/user/info");
 });
+
+var form = document.getElementById("register-form");
+form.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    handleFormSubmit(form);
+});
+
+function handleFormSubmit(form, input) {
+    // validate the form against the constraints
+    var errors = validate(form, constraints);
+    // then we update the form to reflect the results
+    showErrors(form, errors || {});
+    if (!errors) {
+        showSuccess();
+    }
+}

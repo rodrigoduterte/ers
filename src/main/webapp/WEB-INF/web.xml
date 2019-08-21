@@ -8,6 +8,7 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
+    <welcome-file>login.html</welcome-file>
   </welcome-file-list>
   <servlet>
     <description></description>
@@ -17,7 +18,7 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>Register</servlet-name>
-    <url-pattern>/register</url-pattern>
+    <url-pattern>/registered</url-pattern>
   </servlet-mapping>
   <servlet>
     <description></description>

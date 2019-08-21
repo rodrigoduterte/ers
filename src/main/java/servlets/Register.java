@@ -25,6 +25,11 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		System.out.println(request.getParameter("fnameReg")); 
+		System.out.println(request.getParameter("lnameReg"));
+		System.out.println(request.getParameter("emailReg"));
+		System.out.println(request.getParameter("unReg")); 
+		request.getRequestDispatcher("html/registered.html").forward(request, response);
 	}
 
 }
