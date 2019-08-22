@@ -2,6 +2,10 @@ package servlets;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import main.User;
 
 
 /**
@@ -31,9 +37,23 @@ public class UserInfo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		User user = (User) request.getSession().getAttribute("user");
+		Map<String, String> map = new HashMap<>();
+		map.put("fnameReg", user.getFirstName());
+		map.put("lnameReg", user.getLastName());
+		map.put("emailReg", user.getEmail());
+		map.put("unReg", user.getUsername());
+		//map.put("pwReg", user.getPassword());
+		JSONObject jo = new JSONObject(map);
+		
+		System.out.println(jo);
+		
+		// Send json to client to be used for rendering form
+		PrintWriter out = response.getWriter();
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		out.print(jo);
+		out.flush();
 	}
 
 	/**

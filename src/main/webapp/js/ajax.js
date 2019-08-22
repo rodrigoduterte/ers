@@ -15,19 +15,45 @@ function processTableData(json) {
     table.bootstrapTable({ data: json });
 }
 
-
-function getFormData(json, url) {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", url, true);
+//done
+function getFormDataFromServer(uri) {
+	let json = {};
+	let xhttp = new XMLHttpRequest();
+	console.log('getFormDataFromServer');
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let jso = JSON.parse(xhttp.responseText);
+            sessionStorage.setItem('editFormObject', JSON.stringify(jso));
+            renderForm(jso);
+        }
+    };
+    
+    xhttp.open("GET", "http://localhost:8081/ers"+uri, true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(JSON.stringify(json));
+    xhttp.send();
+    console.log("getFormDataFromServer  "+JSON.stringify(json));
+    return json;
 }
 
-function setFormData(formData, url) {
+function renderForm(jso) {
+	Object.entries(jso).forEach(x=>{
+		// x[0]  input name
+		// x[1]  input value
+		document.querySelector("input[name='" + x[0] + "']").value = x[1];
+	});
+}
+
+function endSessionOnCloseTab() {
+	 var xhttp = new XMLHttpRequest();
+	    xhttp.open("POST", "/ers/out", true);
+	    xhttp.send();
+}
+
+function saveFormData(json, url) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", url, true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-    xhttp.send(formData);
+    xhttp.send(json);
 }
 
 function serializeArray(form) {

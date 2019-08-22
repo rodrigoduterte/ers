@@ -2,21 +2,20 @@
 <html>
 
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Employee Page</title>
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<link rel="stylesheet" href="css/style.css">
-	<link href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css"
-		href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.css">
-
-	<!-- <script -->
-	<!-- 	src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script> -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Employee Page</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="css/style.css">
+<link
+	href="https://unpkg.com/bootstrap-table@1.15.4/dist/bootstrap-table.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" type="text/css"
+	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.15.4/extensions/filter-control/bootstrap-table-filter-control.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.css">
 </head>
 
 <body>
@@ -38,7 +37,8 @@
 			</a>
 		</div>
 		<div class="card bg-warning">
-			<a href="#" data-toggle="modal" data-target="#infoModal">
+			<a href="#" data-toggle="modal" data-target="#infoModal"
+				data-backdrop="static" data-keyboard="false">
 				<div class="card-body" id="info">
 					<h5 class="card-title">Edit My Information</h5>
 					<img src="pics/edit.png" class="img-fluid" alt="Sample photo">
@@ -58,21 +58,23 @@
 
 
 	<!-- Modal -->
-	<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-		aria-hidden="true">
+	<div class="modal fade" id="historyModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog mw-100 w-75" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">My Past
 						Tickets</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<table data-toggle="table table-condensed" data-search="true" id="emp-req-table"
-						data-show-columns="true" class="table-bordered table-striped overflow-auto" data-height="200"
-						data-width="900">
+					<table data-toggle="table table-condensed" data-search="true"
+						id="emp-req-table" data-show-columns="true"
+						class="table-bordered table-striped overflow-auto"
+						data-height="200" data-width="900">
 						<thead>
 							<tr class="d-flex">
 								<th data-sortable="true">Request Status</th>
@@ -160,14 +162,15 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-		aria-hidden="true">
+	<div class="modal fade" id="requestModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">My
 						Reimbursement Request</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -175,15 +178,16 @@
 					<form id="request-form">
 						<div class="form-group">
 							<!-- must be disabled and provide the exact date of request -->
-							<input type="text" class="form-control" id="date-request" placeholder="" readonly>
+							<input type="text" class="form-control" id="date-request"
+								placeholder="" readonly>
 						</div>
 						<div class="form-group">
-							<textarea class="form-control" id="description-request" rows="3" placeholeder="Description"
-								name="descReq"></textarea>
+							<textarea class="form-control" id="description-request" rows="3"
+								placeholeder="Description" name="descReq"></textarea>
 						</div>
 						<div class="form-group">
-							<label for="reimb-type">Type of Reimbursement:</label>
-							<select class="form-control" id="type-request" name="typeReq">
+							<label for="reimb-type">Type of Reimbursement:</label> <select
+								class="form-control" id="type-request" name="typeReq">
 								<option>Lodging</option>
 								<option>Travel</option>
 								<option>Food</option>
@@ -191,15 +195,18 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="amount-request" placeholder="Amount"
-								name="amountReq" required min="10" 
-								step=".01" oninvalid="setCustomValidity('Please type amount of at least $10.00')">
+							<input type="text" class="form-control" id="amount-request"
+								placeholder="Amount" name="amountReq" required min="10"
+								step=".01"
+								oninvalid="setCustomValidity('Please type amount of at least $10.00')">
 						</div>
 						<div class="form-group">
-							<input id="image-file" type="file" class="form-control" name="fileReq" />
+							<input id="image-file" type="file" class="form-control"
+								name="fileReq" />
 						</div>
 						<div class="form-group">
-							<input type="button" class="btn btn-primary" id="request-form-button" value="Request">
+							<input type="button" class="btn btn-primary"
+								id="request-form-button" value="Request">
 						</div>
 					</form>
 
@@ -209,45 +216,48 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-		aria-hidden="true">
+	<div class="modal fade" id="infoModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLongTitle">Edit My
 						Information</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close" id="close-edit-button">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 
 				<!-- Edit My Information -->
 				<div class="modal-body">
-					<!-- <form action="/user/info" method="POST" id="edit-form" novalidate> -->
 					<form id="edit-form">
 						<div class="form-group">
-							<input type="text" class="form-control" id="firstname-register" placeholder="Firstname"
-								name="fnameReg" required>
+							<input type="text" class="form-control" id="firstname-register"
+								placeholder="Firstname" name="fnameReg" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="lastname-register" placeholder="Lastname"
-								name="lnameReg" required>
+							<input type="text" class="form-control" id="lastname-register"
+								placeholder="Lastname" name="lnameReg" required>
 						</div>
 						<div class="form-group">
-							<input type="email" class="form-control" id="email-register" placeholder="Email"
-								name="emailReg" required>
+							<input type="email" class="form-control" id="email-register"
+								placeholder="Email" name="emailReg" required>
 						</div>
 						<div class="form-group">
-							<input type="text" class="form-control" id="username-register" placeholder="Username"
-								name="unReg" required minlength="5" maxlength="15">
+							<input type="text" class="form-control" id="username-register"
+								placeholder="Username" name="unReg" required minlength="5"
+								maxlength="15">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="password-register"
-								placeholder="New Password" name="pwReg" minlength="5" maxlength="20" required>
+							<input type="password" class="form-control"
+								id="password-register" placeholder="New Password" name="pwReg"
+								minlength="5" maxlength="20" required>
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" id="conf-password-register"
-								placeholder="Confirm New Password" name="cpwReg" required>
+							<input type="password" class="form-control"
+								id="conf-password-register" placeholder="Confirm New Password"
+								name="cpwReg" required>
 						</div>
 						<!-- <button>go</button> -->
 						<div class="form-group">
@@ -263,8 +273,8 @@
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade" id="logOutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
-		aria-hidden="true">
+	<div class="modal fade" id="logOutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLongTitle" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
@@ -272,8 +282,11 @@
 						sure you want to log out?</h5>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Yes</button>
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+					<form action="/ers/out" method="POST">
+						<input type="submit" class="btn btn-primary" value="Yes">
+					</form>
+					<button type="button" class="btn btn-secondary"
+						data-dismiss="modal">No</button>
 				</div>
 			</div>
 		</div>
@@ -282,21 +295,25 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-	<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
+	<script
+		src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+	<script
+		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/bootstrap-table.min.js"></script>
 	<script
 		src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.1/extensions/filter-control/bootstrap-table-filter-control.min.js"></script>
-	<script src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.js"></script>
-	
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.js"></script>
+
 	<script src="js/validator.js"></script>
-	<!-- <script src="../js/ajax.js"></script> -->
+	<script src="js/ajax.js"></script>
 	<script src="js/employee.js"></script>
 
 </body>

@@ -2,53 +2,64 @@
 <html>
 
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Login Page</title>
+<meta charset="ISO-8859-1">
+<title>Login Page</title>
 
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.css">
-	<link rel="stylesheet" href="../css/style.css">
-	<script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.css">
+<link rel="stylesheet" href="css/style.css">
+<script
+	src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
 </head>
 
 <body>
 	<div class="container container-fluid h-3000">
 		<div class="row">
-			<div class="col">
-			</div>
+			<div class="col"></div>
 			<div class="col-5">
 				<!--  style="height:400px"-->
 				<div class="card mx-auto h-3000" id="cardlogin">
 					<div class="card-body ">
 						<nav>
 							<div class="nav nav-tabs" id="nav-tab" role="tablist">
-								<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
-									role="tab" aria-controls="nav-home" aria-selected="true">Sign In</a> <a
-									class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
-									role="tab" aria-controls="nav-profile" aria-selected="false"> Register
+								<a class="nav-item nav-link active" id="nav-home-tab"
+									data-toggle="tab" href="#nav-home" role="tab"
+									aria-controls="nav-home" aria-selected="true">Sign In</a> <a
+									class="nav-item nav-link" id="nav-profile-tab"
+									data-toggle="tab" href="#nav-profile" role="tab"
+									aria-controls="nav-profile" aria-selected="false"> Register
 								</a>
 							</div>
 						</nav>
 						<div class="tab-content" id="nav-tabContent">
-							<div class="tab-pane fade show active" id="nav-home" role="tabpanel"
-								aria-labelledby="nav-home-tab">
-								<form action="/ers/login" method="POST" onsubmit="return false" id="login-form">
+							<div class="tab-pane fade show active" id="nav-home"
+								role="tabpanel" aria-labelledby="nav-home-tab">
+								<form action="/ers/login" method="POST" onsubmit="return false"
+									id="login-form">
 									<div class="form-group">
 										<div class="col">
-											<input type="text" class="form-control" placeholder="Username"
-												id="username-login" name="unLogin" required>
+											<input type="text" class="form-control"
+												placeholder="Username" id="username-login" name="unLogin"
+												required>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
-											<input type="password" class="form-control" placeholder="Password"
-												id="password-login" name="pwLogin" required>
+											<input type="password" class="form-control"
+												placeholder="Password" id="password-login" name="pwLogin"
+												required>
 										</div>
 									</div>
-									<input type="submit" value="Log In" class="btn btn-primary" id="login-button">
+									<input type="submit" value="Log In" class="btn btn-primary"
+										id="login-button">
 								</form>
 							</div>
 
@@ -58,14 +69,16 @@
 								<form action="/ers/registered" method="POST" id="register-form">
 									<div class="form-group">
 										<div class="col">
-											<input type="text" class="form-control" placeholder="Firstname"
-												id="firstname-register" name="fnameReg" required>
+											<input type="text" class="form-control"
+												placeholder="Firstname" id="firstname-register"
+												name="fnameReg" required>
 										</div>
 									</div>
 									<div class="form-group">
 										<div class="col">
-											<input type="text" class="form-control" placeholder="Lastname"
-												id="lastname-register" name="lnameReg" required>
+											<input type="text" class="form-control"
+												placeholder="Lastname" id="lastname-register"
+												name="lnameReg" required>
 										</div>
 									</div>
 									<div class="form-group">
@@ -77,8 +90,9 @@
 
 									<div class="form-group">
 										<div class="col">
-											<input type="text" class="form-control" placeholder="Username"
-												id="username-register" name="unReg" required minlength="5" maxlength="15">
+											<input type="text" class="form-control"
+												placeholder="Username" id="username-register" name="unReg"
+												required minlength="5" maxlength="15">
 										</div>
 									</div>
 									<!-- <div class="form-group">
@@ -93,34 +107,33 @@
 												id="conf-password-register" name="cpwReg">
 										</div>
 									</div> -->
-									<input type="submit" value="Register" class="btn btn-primary" id="register-button">
+									<input type="submit" value="Register" class="btn btn-primary"
+										id="register-button">
 								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col">
-			</div>
+			<div class="col"></div>
 		</div>
 	</div>
-
-
-
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
 		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
 		crossorigin="anonymous"></script>
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.js"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/hyperform/0.9.5/hyperform.min.js"></script>
 
-	<script src="../js/validator.js"></script>
-	<script src="../js/login.js"></script>
-	<!-- <script src="../js/ajax.js"></script> -->
+	<script src="js/validator.js"></script>
+	<script src="js/login.js"></script>
 
 </body>
 
