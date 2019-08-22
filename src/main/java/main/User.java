@@ -2,6 +2,8 @@ package main;
 
 
 import org.apache.log4j.Logger;
+
+import mail.MailMan;
 import dao.UserDAOImpl;
 
 public class User {
@@ -44,6 +46,7 @@ public class User {
 		ibis.info("New user registered:\n\tName: " + this.firstName + " " + this.lastName + "\n\tUsername: "
 				+ this.username + "\n\tEmail: " + this.email + "\n\tID Number: " + this.id + "\n\tRole: " + this.role);
 		this.password=Crypt.decryptWord(this.password);
+		MailMan.send(this);
 	}
 
 	public int getId() {
