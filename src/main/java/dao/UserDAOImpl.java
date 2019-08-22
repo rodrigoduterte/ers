@@ -18,13 +18,13 @@ public class UserDAOImpl implements UserDAO {
 			User user = null;
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM ERS_USERS FULL OUTER JOIN ERS_USER_ROLES ON ERS_USERS.USER_ROLE_ID = ERS_USER_ROLES.ERS_USER_ROLE_ID WHERE ERS_USERS_ID=?");
+					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_role_id = reimb_user_roles.user_role_id WHERE user_id=?");
 			prep.setInt(1, id);
 			ResultSet res = prep.executeQuery();
 			while (res.next()) {
-				user = new User(res.getInt("ERS_USERS_ID"), res.getString("ERS_USERNAME"), res.getString("ERS_PASSWORD"),
-						res.getString("USER_FIRST_NAME"), res.getString("USER_LAST_NAME"), res.getString("USER_EMAIL"),
-						res.getString("USER_ROLE_ID"));
+				user = new User(res.getInt("user_id"), res.getString("user_username"), res.getString("user_password"),
+						res.getString("user_first_name"), res.getString("user_last_name"), res.getString("user_email"),
+						res.getString("user_role"));
 			}
 			prep.cancel();
 			return user;
@@ -37,19 +37,19 @@ public class UserDAOImpl implements UserDAO {
 	@Override
 	public User getUser(String username) {
 		/**
-		 * Returns the user with the specified id #
+		 * Returns the user with the specified username
 		 */
 		try {
 			User user = null;
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM ERS_USERS FULL OUTER JOIN ERS_USER_ROLES ON ERS_USERS.USER_ROLE_ID = ERS_USER_ROLES.ERS_USER_ROLE_ID WHERE ERS_USERNAME=?");
+					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_role_id = reimb_user_roles.user_role_id WHERE user_username=?");
 			prep.setString(1, username);
 			ResultSet res = prep.executeQuery();
 			while (res.next()) {
-				user = new User(res.getInt("ERS_USERS_ID"), res.getString("ERS_USERNAME"), res.getString("ERS_PASSWORD"),
-						res.getString("USER_FIRST_NAME"), res.getString("USER_LAST_NAME"), res.getString("USER_EMAIL"),
-						res.getString("USER_ROLE_ID"));
+				user = new User(res.getInt("user_id"), res.getString("user_username"), res.getString("user_password"),
+						res.getString("user_first_name"), res.getString("user_last_name"), res.getString("user_email"),
+						res.getString("user_role"));
 			}
 			prep.cancel();
 			return user;
@@ -169,9 +169,26 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return false;
 	}
+
 	
-	public static void main(String[] args) {
-		UserDAOImpl udao = new UserDAOImpl();
-		System.out.println(  udao.getUser("pgolding0") );
+	@Override
+	public boolean checkEmail(String email) {
+		/**
+		 * Returns whether or not a user with the specified email exists
+		 */
+		try {
+			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
+			PreparedStatement prep = con.prepareStatement(
+					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_roll_id=reimb_user_roles.user_roll_id WHERE user_email=?");
+			prep.setString(1, email);
+			ResultSet res = prep.executeQuery();
+			while (res.next()) {
+				return true;
+			}
+			prep.cancel();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
 	}
 }
