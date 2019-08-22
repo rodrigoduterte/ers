@@ -53,6 +53,9 @@ ALTER TABLE reimbursement ADD FOREIGN KEY (reimb_status_id) REFERENCES reimb_sta
 ALTER TABLE reimbursement ADD FOREIGN KEY (reimb_type_id) REFERENCES reimb_type (reimb_type_id);
 ALTER TABLE reimb_user ADD FOREIGN KEY (user_role_id) REFERENCES reimb_user_roles (user_role_id);
 
+ALTER TABLE reimb_user ADD CONSTRAINT u_email UNIQUE (user_email);
+ALTER TABLE reimb_user ADD CONSTRAINT u_username UNIQUE (user_username);
+
 INSERT INTO reimb_status VALUES (1, 'PENDING');
 INSERT INTO reimb_status VALUES (2, 'APPROVED');
 INSERT INTO reimb_status VALUES (3, 'DENIED');
