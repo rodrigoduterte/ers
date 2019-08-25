@@ -9,9 +9,8 @@ import org.apache.log4j.Logger;
 import main.Reimbursement;
 import main.User;
 
-public class ReimbursementDAOImpl implements ReimbursementDAO {
+public class ReimbursementDAOImpl implements ReimbursementDAO {//{
 	protected final static Logger ibis = Logger.getLogger(User.class);
-
 	@Override
 	public Reimbursement getReimbursement(int id) {
 		/**
@@ -39,7 +38,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		}
 		return null;
 	}
-
+	
 	@Override
 	public void approve(User user, Reimbursement reimb) {
 		/**

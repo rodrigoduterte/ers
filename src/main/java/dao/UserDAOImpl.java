@@ -136,7 +136,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_roll_id=reimb_user_roles.user_roll_id WHERE user_id=?");
+					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_role_id=reimb_user_roles.user_role_id WHERE user_id=?");
 			prep.setInt(1, id);
 			ResultSet res = prep.executeQuery();
 			while (res.next()) {
@@ -157,7 +157,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_roll_id=reimb_user_roles.user_roll_id WHERE user_username=?");
+					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_role_id=reimb_user_roles.user_role_id WHERE user_username=?");
 			prep.setString(1, username);
 			ResultSet res = prep.executeQuery();
 			while (res.next()) {
@@ -179,7 +179,7 @@ public class UserDAOImpl implements UserDAO {
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_roll_id=reimb_user_roles.user_roll_id WHERE user_email=?");
+					"SELECT * FROM reimb_user FULL OUTER JOIN reimb_user_roles ON reimb_user.user_role_id=reimb_user_roles.user_role_id WHERE user_email=?");
 			prep.setString(1, email);
 			ResultSet res = prep.executeQuery();
 			while (res.next()) {

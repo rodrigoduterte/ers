@@ -1,7 +1,32 @@
 /* register a custom validator fields */
 let unReg = document.getElementById('username-register');
+let emReg = document.getElementById('email-register');
 let cpReg = document.getElementById('conf-password-register');
 let pwReg = document.getElementById('password-register');
+
+function limitSize(file) {
+    var FileSize = file.files[0].size / 1024 / 1024; // in MB
+    if (FileSize > 5) {
+        alert('File size exceeds 5 MB');
+        file.value = null;
+    }
+}
+
+
+function fieldExists(text) {
+	console.log("textttt   " + text)
+  if (unReg.value.length > 0) {
+    if (text == unReg.value) {
+      unReg.setCustomValidity('Username already exists');
+    }
+  }
+  if (emReg.value.length > 0) {
+    if (text == emReg.value) {
+      emReg.setCustomValidity('Email already exists');
+    }
+  }
+}
+
 
 if (unReg != null) {
   hyperform.addValidator(unReg,

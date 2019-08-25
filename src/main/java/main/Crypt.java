@@ -62,10 +62,9 @@ class Crypt {
 			str += (char) (((int) word.charAt(i) + 56) / 2);
 		}
 		return str;
-
 	}
 	
 	public static void main(String[] args) {
-		System.out.println( Crypt.decryptWord("yklC:oU_}3@º¤ $~JÀºXb>¾pVCG~DgqU") );
+		System.out.println( Crypt.decryptWord("yklC?:oU_}3@º¤ $~JÀºXb>¾pV??CG~DgqU") );
 	}
 }

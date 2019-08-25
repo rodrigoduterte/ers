@@ -17,7 +17,11 @@ public class User {
 	private String email;
 	private String role;
 	UserDAOImpl udao = new UserDAOImpl();
-
+	
+	public User() {
+		
+	};
+	
 	public User(int id, String username, String password, String firstName, String lastName, String email,
 			String role) {
 		super();

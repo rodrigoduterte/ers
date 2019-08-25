@@ -56,6 +56,8 @@ public class Login extends HttpServlet {
 
 		UserDAOImpl udao = new UserDAOImpl();
 		String unLogin = request.getParameter("unLogin");
+		String pwLogin = request.getParameter("pwLogin");
+		
 		try {
 			User user = udao.getUser(unLogin);  // get user using dao
 			HttpSession session = request.getSession();  // get session
@@ -64,10 +66,11 @@ public class Login extends HttpServlet {
 			if (session.getAttribute("user") == null) {
 				request.getRequestDispatcher("html/login.html").forward(request, response);
 			} else {
-				if ( user.getPassword().equals(request.getParameter("pwLogin") ) ) {
-					if (user.getRole().equals("1")) {
+				System.out.println(user);
+				if ( user.getPassword().equals( pwLogin ) ) {
+					if (user.getRole().equals("EMPLOYEE")) {
 						response.sendRedirect("/ers/home?user=1");
-					} else if (user.getRole().equals("2")) {
+					} else if (user.getRole().equals("FINANCE MANAGER")) {
 						response.sendRedirect("/ers/home?user=2");
 					}
 				} else {

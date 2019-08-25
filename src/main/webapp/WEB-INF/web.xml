@@ -45,6 +45,7 @@
     <display-name>EmployeeRequest</display-name>
     <servlet-name>EmployeeRequest</servlet-name>
     <servlet-class>servlets.EmployeeRequest</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>EmployeeRequest</servlet-name>

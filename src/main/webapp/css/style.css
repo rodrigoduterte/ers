@@ -7,12 +7,28 @@ body {
 	float: none; /* Added */
 	margin-top: 100px; /* Added */
 	max-width: 600px;
-/* 	height: 500px; */
+	/* 	height: 500px; */
 }
 
 /* #historyModal { */
 /* 	width: 700px; */
 /* } */
+/* @media screen and (min-width: 992px) { */
+/* 	.modal-lg { */
+/* 		width: 950px; New width for large modal */
+/* 	} */
+/* } */
+
+/* #historyModal { */
+/*   width: 1100px; */
+/*   margin: auto; */
+/* } */
+
+@media screen and (min-width: 992px) {
+        .modal-lg {
+          width: 950px; /* New width for large modal */
+        }
+    }
 
 
 .card-deck {
@@ -28,9 +44,7 @@ body {
 	width: 1000px;
 }
 
-
 img {
 	width: 250px;
 	height: 400px;
 }
-
