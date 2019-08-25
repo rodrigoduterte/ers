@@ -122,13 +122,13 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimbursement FULL OUTER JOIN reimb_status ON reimbursement.reimb_status_id=reimb_status.reimb_status_id FULL OUTER JOIN reimb_type ON reimbursement.reimb_type_id=reimb_type.reimb_type_id WHERE reimb_id=?");
+					"SELECT * FROM reimbursement WHERE reimb_id=?");
 			prep.setInt(1, id);
 			ResultSet res = prep.executeQuery();
+			prep.cancel();
 			while (res.next()) {
 				return true;
 			}
-			prep.cancel();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -143,15 +143,15 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
 			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimbursement FULL OUTER JOIN reimb_status ON reimbursement.reimb_status_id=reimb_status.reimb_status_id FULL OUTER JOIN reimb_type ON reimbursement.reimb_type_id=reimb_type.reimb_type_id WHERE reimb_id=?");
+					"SELECT * FROM reimbursement WHERE reimb_id=?");
 			prep.setInt(1, id);
 			ResultSet res = prep.executeQuery();
+			prep.cancel();
 			while (res.next()) {
-				if (res.getString("reimb_status").equalsIgnoreCase("PENDING")) {
+				if (res.getInt("reimb_status_id")==1) {
 					return true;
 				}
 			}
-			prep.cancel();
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
