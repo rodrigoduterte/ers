@@ -18,10 +18,6 @@ public class Reimbursement {
 	private String type;
 	private String status;
 	ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
-
-	public Reimbursement() {
-		
-	}
 	
 	public Reimbursement(double ammount, String description, Blob receipt, User author, String type) {
 		/**
