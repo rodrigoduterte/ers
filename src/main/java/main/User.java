@@ -3,6 +3,8 @@ package main;
 
 import org.apache.log4j.Logger;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import mail.MailMan;
 import dao.UserDAOImpl;
 
@@ -18,6 +20,7 @@ public class User {
 	private String role;
 	UserDAOImpl udao = new UserDAOImpl();
 	
+	public User (int id) {this.id = id;}
 	public User(int id, String username, String password, String firstName, String lastName, String email,
 			String role) {
 		super();
@@ -48,15 +51,15 @@ public class User {
 		this.password=Crypt.decryptWord(this.password);
 		MailMan.send(this);
 	}
-
+	@JsonIgnore
 	public int getId() {
 		return id;
 	}
-
+	@JsonIgnore
 	public String getUsername() {
 		return username;
 	}
-
+	@JsonIgnore
 	public String getPassword() {
 		return password;
 	}
@@ -68,7 +71,7 @@ public class User {
 	public String getLastName() {
 		return lastName;
 	}
-
+	@JsonIgnore
 	public String getEmail() {
 		return email;
 	}

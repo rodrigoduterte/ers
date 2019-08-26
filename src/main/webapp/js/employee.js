@@ -13,7 +13,7 @@ let csvBtn = document.getElementById('csv-button');
 
 /// table requests tabulator
 let requestHistoryTable = new Tabulator("#request-history-table", {
-	placeholder:"Table is loading data",
+	placeholder:"<h1>Table is loading data</h1>",
 	height:"300px",
     layout:"fitData",
     layoutColumnsOnNewData:true,
@@ -21,16 +21,17 @@ let requestHistoryTable = new Tabulator("#request-history-table", {
     columns:[  // i need a query to construct
         {title:"Request Status", field:"status", sorter:"string"},
         {title:"Date Submitted", field:"created", sorter: "date", sorterParams:{format:"MMM d, yyyy"}},
-        {title:"Date Approved/Denied", field:"resolved", sorter: "date", sorterParams:{format:"MMM d, yyyy"}},
-        {
-        	title: "Approved/Denied By",
-        	columns: [
-        	{title:"Firstname", field:"resolver.firstName", sorter: "string"}, 
-            {title:"Lastname", field:"resolver.lastName", sorter: "string"}]
-        },
+        {title:"Date Resolved", field:"resolved", sorter: "date", sorterParams:{format:"MMM d, yyyy"}},
+        {title: "Resolved By", field: "resolver.name", sorter: "string"},
         {title:"Description", field:"description", sorter: "string"},
         {title:"Type", field:"type", sorter:"string"},
-        {title:"Amount", field:"ammount", sorter:"number"}
+        {title:"Amount", field:"ammount", sorter:"number", formatter:"money", formatterParams:{
+            decimal:".",
+            thousand:",",
+            symbol:"$",
+            symbolAfter:"p",
+            precision:false,
+        }}
     ]
 });
 
@@ -71,6 +72,7 @@ csvBtn.addEventListener('click', function() {
 
 //invoke /out when tab is closed
 window.onunload = function() {
+	localStorage.clear();
 	endSessionOnCloseTab();
 }
 
@@ -122,7 +124,7 @@ window.onload = function() {
 	pdfBtn.disabled = true;
 	csvBtn.disabled = true;
 	getFormDataFromServer("/user/info");
-	tableLoad(requestHistoryTable, 'http://localhost:8081/ers/employee/req?all=0')
+	tableLoadBytes([requestHistoryTable], '/reqs?n=0', [pdfBtn, csvBtn]);
 }
 
 //document.addEventListener("DOMContentLoaded", function(event) { 

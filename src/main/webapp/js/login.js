@@ -25,4 +25,8 @@ emailInput.addEventListener('keyup', function(ev){
 	}
 })
 
+///
+window.onload = function() {
+	//preLoad("http://localhost:8081/ers/employee/req?all=2");
+}
 

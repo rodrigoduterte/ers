@@ -1,3 +1,38 @@
+function preLoad(url) {
+	var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let json = JSON.parse(xhttp.response);
+            sessionStorage.setItem('managerTables', JSON.stringify(json));
+        }
+    };
+    xhttp.open("GET", url, true);
+    xhttp.send();
+}
+
+function tableLoadBytes(table, url, buttons) {
+	var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            let msgpjo = msgpack.decode( new Uint8Array(xhttp.response));
+            console.log("parsed msgpack" + msgpjo);
+            table.forEach((cv, idx, arr)=> {
+            	arr[idx].updateOrAddData(msgpjo);
+            	arr[idx].redraw(true);
+            })
+            buttons.forEach((cv, idx, arr)=> {
+            	arr[idx].disabled = false;
+            })
+        }
+    };
+    xhttp.open("GET", "http://localhost:8081/ers"+url, true);
+    xhttp.responseType = "arraybuffer";
+    xhttp.send();
+}
+
+
 function tableLoad(table, url) {
     var xhttp = new XMLHttpRequest();
 
@@ -12,10 +47,6 @@ function tableLoad(table, url) {
     };
     xhttp.open("GET", url, true);
     xhttp.send();
-}
-
-function processTableData(json) {
-    table.bootstrapTable({ data: json });
 }
 
 //done
@@ -89,14 +120,3 @@ function saveFormData(jso, url) {
     sessionStorage.setItem('editFormObject', JSON.stringify(jso));
     renderForm(jso);
 }
-
-//function serializeArray(form) {
-//    var objects = [];
-//    if (typeof form == 'object' && form.nodeName.toLowerCase() == "form") {
-//        var fields = form.getElementsByTagName("input");
-//        for (var i = 0; i < fields.length; i++) {
-//            objects[objects.length] = { name: fields[i].getAttribute("name"), value: fields[i].getAttribute("value") };
-//        }
-//    }
-//    return objects;
-//} 

@@ -48,8 +48,6 @@ public class UserInfo extends HttpServlet {
 			map.put("unReg", user.getUsername());
 			JSONObject jo = new JSONObject(map);
 
-			System.out.println(jo);
-
 			// Send json to client to be used for rendering form
 			PrintWriter out = response.getWriter();
 			response.setContentType("application/json");

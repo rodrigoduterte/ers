@@ -1,6 +1,8 @@
 /* register a custom validator fields */
 let unReg = document.getElementById('username-register');
+let unEx = document.getElementById('username-exists');
 let emReg = document.getElementById('email-register');
+let emEx = document.getElementById('email-exists');
 let cpReg = document.getElementById('conf-password-register');
 let pwReg = document.getElementById('password-register');
 
@@ -17,12 +19,14 @@ function fieldExists(text) {
 	console.log("textttt   " + text)
   if (unReg.value.length > 0) {
     if (text == unReg.value) {
-      unReg.setCustomValidity('Username already exists');
+    	unEx.innerHTML = 'Username already exists'
+    	//unReg.setCustomValidity('Username already exists');
     }
   }
   if (emReg.value.length > 0) {
     if (text == emReg.value) {
-      emReg.setCustomValidity('Email already exists');
+    	pwEx.innerHTML = 'Email already exists'
+    	//emReg.setCustomValidity('Email already exists');
     }
   }
 }

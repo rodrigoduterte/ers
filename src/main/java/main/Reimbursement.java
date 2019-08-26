@@ -1,13 +1,18 @@
 package main;
 
 import java.sql.Blob;
-import java.sql.Date;
+import java.util.Date;
 import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import dao.ReimbursementDAOImpl;
 
 public class Reimbursement {
 	protected final static Logger ibis = Logger.getLogger(User.class);
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM-dd-yyyy")
 	private Date created;
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM-dd-yyyy")
 	private Date resolved;
 	private int id;
 	private double ammount;
