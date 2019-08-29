@@ -19,7 +19,7 @@ public class Temper {
 		return (chunk(5) + "#" + chunk(4) + "=" + chunk(5));
 	}
 
-	private static String chunk(int length) {
+	public static String chunk(int length) {
 		Random set = new Random();
 		String str = new String();
 		for (int i = 0; i < length; i++) {
