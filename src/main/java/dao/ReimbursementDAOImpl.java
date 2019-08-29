@@ -9,8 +9,9 @@ import org.apache.log4j.Logger;
 import main.Reimbursement;
 import main.User;
 
-public class ReimbursementDAOImpl implements ReimbursementDAO {//{
+public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 	protected final static Logger ibis = Logger.getLogger(User.class);
+
 	@Override
 	public Reimbursement getReimbursement(int id) {
 		/**
@@ -38,7 +39,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {//{
 		}
 		return null;
 	}
-	
+
 	@Override
 	public void approve(User user, Reimbursement reimb) {
 		/**
@@ -120,8 +121,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {//{
 		 */
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
-			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimbursement WHERE reimb_id=?");
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM reimbursement WHERE reimb_id=?");
 			prep.setInt(1, id);
 			ResultSet res = prep.executeQuery();
 			prep.cancel();
@@ -141,13 +141,12 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {//{
 		 */
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
-			PreparedStatement prep = con.prepareStatement(
-					"SELECT * FROM reimbursement WHERE reimb_id=?");
+			PreparedStatement prep = con.prepareStatement("SELECT * FROM reimbursement WHERE reimb_id=?");
 			prep.setInt(1, id);
 			ResultSet res = prep.executeQuery();
 			prep.cancel();
 			while (res.next()) {
-				if (res.getInt("reimb_status_id")==1) {
+				if (res.getInt("reimb_status_id") == 1) {
 					return true;
 				}
 			}
@@ -291,8 +290,9 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {//{
 			e.printStackTrace();
 		}
 	}
+
 	public static void main(String[] args) {
 		ReimbursementDAOImpl rei = new ReimbursementDAOImpl();
-		System.out.println( rei.getAll(new User(1)) );
+		System.out.println(rei.getAll(new User(1)));
 	}
 }

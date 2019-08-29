@@ -5,7 +5,7 @@ CREATE TABLE reimbursement
 	reimb_submit TIMESTAMP (6)NOT NULL, 
 	reimb_resolve TIMESTAMP (6), 
 	reimb_description VARCHAR2 (250) NOT NULL, 
-	reimb_receipt BLOB, 
+	reimb_receipt VARCHAR2(250), 
 	reimb_author NUMBER NOT NULL, 
 	reimb_resolver NUMBER, 
 	reimb_status_id NUMBER NOT NULL, 
@@ -52,9 +52,6 @@ ALTER TABLE reimbursement ADD FOREIGN KEY (reimb_resolver) REFERENCES reimb_user
 ALTER TABLE reimbursement ADD FOREIGN KEY (reimb_status_id) REFERENCES reimb_status (reimb_status_id);
 ALTER TABLE reimbursement ADD FOREIGN KEY (reimb_type_id) REFERENCES reimb_type (reimb_type_id);
 ALTER TABLE reimb_user ADD FOREIGN KEY (user_role_id) REFERENCES reimb_user_roles (user_role_id);
-
-ALTER TABLE reimb_user ADD CONSTRAINT u_email UNIQUE (user_email);
-ALTER TABLE reimb_user ADD CONSTRAINT u_username UNIQUE (user_username);
 
 INSERT INTO reimb_status VALUES (1, 'PENDING');
 INSERT INTO reimb_status VALUES (2, 'APPROVED');

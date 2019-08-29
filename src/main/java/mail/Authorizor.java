@@ -13,11 +13,11 @@ public class Authorizor extends Authenticator {
 		super();
 		this.uname = username;
 		this.pword = password;
-		auth=new PasswordAuthentication(uname,pword);
+		auth = new PasswordAuthentication(uname, pword);
 	}
 
 	@Override
-    public PasswordAuthentication getPasswordAuthentication() {
-        return auth;
-    }
+	public PasswordAuthentication getPasswordAuthentication() {
+		return auth;
+	}
 }

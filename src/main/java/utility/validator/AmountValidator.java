@@ -2,8 +2,8 @@ package utility.validator;
 
 import java.math.BigDecimal;
 
-public class AmountValidator extends Validator{
-	
+public class AmountValidator extends Validator {
+
 	private static int digitSize = 2;
 
 	public static boolean isValid(double amount) {
@@ -14,7 +14,7 @@ public class AmountValidator extends Validator{
 		String[] digit = new Double(amount).toString().split("\\.");
 		return digit[1].length() <= digitSize && digit[0].length() > 0;
 	}
-	
+
 	private static boolean hasTwoDigitsOrLess(double amount) {
 		return BigDecimal.valueOf(amount).scale() <= 2;
 	}

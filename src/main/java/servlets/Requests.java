@@ -81,32 +81,35 @@ public class Requests extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		StringBuffer jb = new StringBuffer();
 		ObjectMapper om = new ObjectMapper();
-		
+
 		Map maps = Maps.getQueryMap(request.getQueryString());
 		String app = (String) maps.get("app");
 		String line = null;
-		
-		 try {
-			 BufferedReader reader = request.getReader();
-		  while ((line = reader.readLine()) != null)
-			  jb.append(line);
-		 } catch (Exception e) {  }
 
-		 try {
-			 User user = (User) request.getSession().getAttribute("user");
-			 Integer[] numbers = om.readValue(jb.toString(), Integer[].class); // get the reimb_id numbers
-			 for (Integer number: numbers) {
-				 if(app.equals("0")) {
-					 rei.deny(user, new Reimbursement(number));
-				 } else if (app.equals("1")) {
-					 rei.approve(user, new Reimbursement(number));
-				 }
-			 }
+		try {
+			BufferedReader reader = request.getReader();
+			while ((line = reader.readLine()) != null)
+				jb.append(line);
+		} catch (Exception e) {
+		}
 
-		 } catch (Exception e) {  }
+		try {
+			User user = (User) request.getSession().getAttribute("user");
+			Integer[] numbers = om.readValue(jb.toString(), Integer[].class); // get the reimb_id numbers
+			for (Integer number : numbers) {
+				if (app.equals("0")) {
+					rei.deny(user, new Reimbursement(number));
+				} else if (app.equals("1")) {
+					rei.approve(user, new Reimbursement(number));
+				}
+			}
+
+		} catch (Exception e) {
+		}
 	}
 
 }

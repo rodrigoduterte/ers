@@ -91,32 +91,32 @@ public class UserInfo extends HttpServlet {
 		// TODO Auto-generated method stub
 		UserDAOImpl userdao = new UserDAOImpl();
 		HttpSession session = request.getSession();
-		
+
 		if (session != null) { //
-			String data = "";   
-		    StringBuilder builder = new StringBuilder();
-		    BufferedReader reader = request.getReader();
-		    String line;
-		    while ((line = reader.readLine()) != null) {
-		        builder.append(line);
-		    }
-		    
-		    data = builder.toString();
-		    JSONObject json = new JSONObject(data); 
-			
+			String data = "";
+			StringBuilder builder = new StringBuilder();
+			BufferedReader reader = request.getReader();
+			String line;
+			while ((line = reader.readLine()) != null) {
+				builder.append(line);
+			}
+
+			data = builder.toString();
+			JSONObject json = new JSONObject(data);
+
 			User user = (User) session.getAttribute("user");
 			System.out.println(user);
 			System.out.println(json);
-			user.changeFirstName( json.getString("fnameReg") );
-			user.changeLastName( json.getString("lnameReg") );
-			user.changeUsername( json.getString("unReg") );
-			user.changeEmail( json.getString("emailReg") );
-			user.changePassword( json.getString("pwReg") );
+			user.changeFirstName(json.getString("fnameReg"));
+			user.changeLastName(json.getString("lnameReg"));
+			user.changeUsername(json.getString("unReg"));
+			user.changeEmail(json.getString("emailReg"));
+			user.changePassword(json.getString("pwReg"));
 		} else {
 			String fn = request.getParameter("fnameReg"), ln = request.getParameter("lnameReg");
 			String un = request.getParameter("unReg"), em = request.getParameter("emailReg");
 			String pw = request.getParameter("pwReg");
-			
+
 			User user = new User(un, fn, ln, em, "EMPLOYEE"); // must register an employee in the database before
 																// sending an email
 			userdao.create(user); // save employee to database

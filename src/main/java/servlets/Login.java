@@ -43,9 +43,9 @@ public class Login extends HttpServlet {
 				response.sendRedirect("/ers/home?user=2");
 			}
 		}
-		
+
 	}
-	
+
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -57,27 +57,29 @@ public class Login extends HttpServlet {
 		UserDAOImpl udao = new UserDAOImpl();
 		String unLogin = request.getParameter("unLogin");
 		String pwLogin = request.getParameter("pwLogin");
-		
+
 		try {
-			User user = udao.getUser(unLogin);  // get user using dao
-			HttpSession session = request.getSession();  // get session
+			User user = udao.getUser(unLogin); // get user using dao
+			HttpSession session = request.getSession(); // get session
 			session.setAttribute("user", user); // save user to session
-			
+
 			if (session.getAttribute("user") == null) {
 				request.getRequestDispatcher("html/login.html").forward(request, response);
 			} else {
 				System.out.println(user);
-				if ( user.getPassword().equals( pwLogin ) ) {
+				if (user.getPassword().equals(pwLogin)) {
 					if (user.getRole().equals("EMPLOYEE")) {
-						response.sendRedirect("/ers/home?user=1&fname="+user.getFirstName()+"&lname="+user.getLastName());
+						response.sendRedirect(
+								"/ers/home?user=1&fname=" + user.getFirstName() + "&lname=" + user.getLastName());
 					} else if (user.getRole().equals("FINANCE MANAGER")) {
-						response.sendRedirect("/ers/home?user=2&fname="+user.getFirstName()+"&lname="+user.getLastName());
+						response.sendRedirect(
+								"/ers/home?user=2&fname=" + user.getFirstName() + "&lname=" + user.getLastName());
 					}
 				} else {
 					request.getRequestDispatcher("html/login.html").forward(request, response);
 				}
 			}
-			
+
 		} catch (Exception e) {
 			request.getRequestDispatcher("html/login.html").forward(request, response);
 		}

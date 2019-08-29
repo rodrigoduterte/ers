@@ -32,7 +32,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public User getUser(String username) {
 		/**
@@ -65,7 +65,8 @@ public class UserDAOImpl implements UserDAO {
 		 */
 		try {
 			Connection con = DriverManager.getConnection(Info.getUrl(), Info.getUser(), Info.getPass());
-			PreparedStatement prep = con.prepareStatement("UPDATE reimb_user SET user_username=?,user_password=?,user_first_name=?,user_last_name=?,user_email=? WHERE user_id=?");
+			PreparedStatement prep = con.prepareStatement(
+					"UPDATE reimb_user SET user_username=?,user_password=?,user_first_name=?,user_last_name=?,user_email=? WHERE user_id=?");
 			prep.setInt(6, user.getId());
 			prep.setString(1, user.getUsername());
 			prep.setString(2, user.getPassword());
@@ -126,7 +127,7 @@ public class UserDAOImpl implements UserDAO {
 			return 0;
 		}
 	}
-	
+
 	@Override
 	public boolean exists(int id) {
 		/**
@@ -147,7 +148,7 @@ public class UserDAOImpl implements UserDAO {
 		}
 		return false;
 	}
-	
+
 	@Override
 	public boolean exists(String username) {
 		/**
@@ -169,7 +170,6 @@ public class UserDAOImpl implements UserDAO {
 		return false;
 	}
 
-	
 	@Override
 	public boolean checkEmail(String email) {
 		/**

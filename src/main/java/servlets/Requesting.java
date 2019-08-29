@@ -28,7 +28,6 @@ import main.User;
 import utility.ds.JSON;
 import utility.ds.Maps;
 
-
 /**
  * Servlet implementation class Requesting
  */
@@ -47,7 +46,7 @@ public class Requesting extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// used for postman purposes
@@ -59,24 +58,24 @@ public class Requesting extends HttpServlet {
 		String all = (String) maps.get("all");
 		String t = (String) maps.get("t");
 
-		ObjectMapper mapper = new ObjectMapper( new MessagePackFactory());
+		ObjectMapper mapper = new ObjectMapper(new MessagePackFactory());
 		byte[] messagePackBytes = null;
-		
-		if (all.equals("0"))	{
+
+		if (all.equals("0")) {
 			reims = redao.getAll(new User(1));
-		} else if (all.equals("1")) {  // load open requests
+		} else if (all.equals("1")) { // load open requests
 			reims = redao.getPending();
-		} else if (all.equals("2")) {  // load request history
+		} else if (all.equals("2")) { // load request history
 			reims = redao.getAll();
-		} 
-		
+		}
+
 		if (t.equals("j")) {
-		////// Convert ArrayList of Reimbursements into JSON Array
+			////// Convert ArrayList of Reimbursements into JSON Array
 			response.setContentType("application/json;charset=UTF-8");
 			response.setHeader("Access-Control-Allow-Origin", "*");
 			ObjectMapper om = new ObjectMapper();
 			PrintWriter out = response.getWriter();
-			
+
 			out.write(om.writeValueAsString(reims));
 			out.flush();
 		} else if (t.equals("m")) {
@@ -87,7 +86,7 @@ public class Requesting extends HttpServlet {
 			out.write(messagePackBytes);
 			out.flush();
 		}
-		
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -122,11 +121,11 @@ public class Requesting extends HttpServlet {
 				reimb = json.jsonToOneObject(Reimbursement.class);
 				user = (User) session.getAttribute("user");
 				redao.create(reimb, user);
-				
+
 			} catch (FileUploadException e) {
 				throw new ServletException("Parsing file upload failed.", e);
 			}
 		}
-		
+
 	}
 }
