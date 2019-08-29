@@ -5,7 +5,7 @@ CREATE TABLE reimbursement
 	reimb_submit TIMESTAMP (6)NOT NULL, 
 	reimb_resolve TIMESTAMP (6), 
 	reimb_description VARCHAR2 (250) NOT NULL, 
-	reimb_receipt BLOB, 
+	reimb_receipt VARCHAR2(250), 
 	reimb_author NUMBER NOT NULL, 
 	reimb_resolver NUMBER, 
 	reimb_status_id NUMBER NOT NULL, 

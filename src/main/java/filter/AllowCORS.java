@@ -15,12 +15,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AllowCORS implements Filter {
 
-    /**
-     * Default constructor. 
-     */
-    public AllowCORS() {
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * Default constructor.
+	 */
+	public AllowCORS() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see Filter#destroy()
@@ -32,28 +32,30 @@ public class AllowCORS implements Filter {
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+			throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest req = (HttpServletRequest) request;
-        System.out.println("CORSFilter HTTP Request: " + req.getMethod());
- 
-        // Authorize (allow) all domains to consume the content
-        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
-        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods","GET, OPTIONS, HEAD, PUT, POST");
-        ((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type");
-        ((HttpServletResponse) response).addHeader("Access-Control-Max-Age", "86400");
- 
-        HttpServletResponse resp = (HttpServletResponse) response;
- 
-        // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
-        if (req.getMethod().equals("OPTIONS")) {
-            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-            return;
-        }
- 
-        // pass the request along the filter chain
-        chain.doFilter(request, response);
+		System.out.println("CORSFilter HTTP Request: " + req.getMethod());
+
+		// Authorize (allow) all domains to consume the content
+		((HttpServletResponse) response).addHeader("Access-Control-Allow-Origin", "*");
+		((HttpServletResponse) response).addHeader("Access-Control-Allow-Methods", "GET, OPTIONS, HEAD, PUT, POST");
+		((HttpServletResponse) response).addHeader("Access-Control-Allow-Headers", "Content-Type");
+		((HttpServletResponse) response).addHeader("Access-Control-Max-Age", "86400");
+
+		HttpServletResponse resp = (HttpServletResponse) response;
+
+		// For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS
+		// handshake
+		if (req.getMethod().equals("OPTIONS")) {
+			resp.setStatus(HttpServletResponse.SC_ACCEPTED);
+			return;
+		}
+
+		// pass the request along the filter chain
+		chain.doFilter(request, response);
 	}
 
 	/**

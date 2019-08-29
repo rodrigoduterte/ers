@@ -1,6 +1,5 @@
 package main;
 
-
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,7 +8,7 @@ import mail.MailMan;
 import dao.UserDAOImpl;
 
 public class User {
-	
+
 	protected final static Logger ibis = Logger.getLogger(User.class);
 	private int id;
 	private String username;
@@ -19,8 +18,11 @@ public class User {
 	private String email;
 	private String role;
 	UserDAOImpl udao = new UserDAOImpl();
-	
-	public User (int id) {this.id = id;}
+
+	public User(int id) {
+		this.id = id;
+	}
+
 	public User(int id, String username, String password, String firstName, String lastName, String email,
 			String role) {
 		super();
@@ -48,17 +50,20 @@ public class User {
 		this.id = udao.retrieve();
 		ibis.info("New user registered:\n\tName: " + this.firstName + " " + this.lastName + "\n\tUsername: "
 				+ this.username + "\n\tEmail: " + this.email + "\n\tID Number: " + this.id + "\n\tRole: " + this.role);
-		this.password=Crypt.decryptWord(this.password);
+		this.password = Crypt.decryptWord(this.password);
 		MailMan.send(this);
 	}
+
 	@JsonIgnore
 	public int getId() {
 		return id;
 	}
+
 	@JsonIgnore
 	public String getUsername() {
 		return username;
 	}
+
 	@JsonIgnore
 	public String getPassword() {
 		return password;
@@ -71,6 +76,7 @@ public class User {
 	public String getLastName() {
 		return lastName;
 	}
+
 	@JsonIgnore
 	public String getEmail() {
 		return email;

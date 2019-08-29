@@ -23,11 +23,11 @@ public class Reimbursement {
 	private String type;
 	private String status;
 	ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
-	
+
 	public Reimbursement(int id) {
 		this.id = id;
 	}
-	
+
 	public Reimbursement(double ammount, String description, Blob receipt, User author, String type) {
 		/**
 		 * Used to Instantiate a newly created ticket and add it to the database

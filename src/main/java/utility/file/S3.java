@@ -29,18 +29,16 @@ import com.amazonaws.services.s3.model.S3ObjectSummary;
  * aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
 */
 
-
 public class S3 {
 	AmazonS3 s3 = new AmazonS3Client();
 	Region usEast = Region.getRegion(Regions.US_EAST_1);
-	
-	
+
 	String bucketName = "my-first-s3-bucket-" + UUID.randomUUID();
-    String key = new String("MyObjectKey");
-    
-//    try {
-//    	s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
-//    } catch(AmazonServiceException ase) {
-//    	
-//    }
+	String key = new String("MyObjectKey");
+
+	// try {
+	// s3.putObject(new PutObjectRequest(bucketName, key, createSampleFile()));
+	// } catch(AmazonServiceException ase) {
+	//
+	// }
 }
