@@ -1,5 +1,6 @@
 package servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.msgpack.jackson.dataformat.MessagePackFactory;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -27,29 +29,32 @@ import utility.ds.*;
  */
 public class Requests extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private static ReimbursementDAOImpl rei = new ReimbursementDAOImpl();
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public Requests() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+	private static ReimbursementDAOImpl rei = new ReimbursementDAOImpl();
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public Requests() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		User user;
 		Map maps = Maps.getQueryMap(request.getQueryString());
 		HttpSession session = request.getSession();
 		String n = (String) maps.get("n");
 		ArrayList<Reimbursement> reims = new ArrayList<Reimbursement>();
-		
-		ObjectMapper mapper = new ObjectMapper( new MessagePackFactory());
+
+		ObjectMapper mapper = new ObjectMapper(new MessagePackFactory());
 		byte[] messagePackBytes = null;
-		
+
 		if (session != null) {
 			user = (User) session.getAttribute("user");
 			if (user.getRole().equals("EMPLOYEE")) {
@@ -63,16 +68,45 @@ public class Requests extends HttpServlet {
 					reims = rei.getAll();
 				}
 			}
-			
+
 			try {
 				OutputStream out = response.getOutputStream();
 				response.setContentType("text/plain");
 				messagePackBytes = mapper.writeValueAsBytes(reims);
 				out.write(messagePackBytes);
 				out.flush();
-	        } catch (JsonProcessingException e) {
-	            e.printStackTrace();
-	        }
+			} catch (JsonProcessingException e) {
+				e.printStackTrace();
+			}
 		}
 	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		StringBuffer jb = new StringBuffer();
+		ObjectMapper om = new ObjectMapper();
+		
+		Map maps = Maps.getQueryMap(request.getQueryString());
+		String app = (String) maps.get("app");
+		String line = null;
+		
+		 try {
+			 BufferedReader reader = request.getReader();
+		  while ((line = reader.readLine()) != null)
+			  jb.append(line);
+		 } catch (Exception e) {  }
+
+		 try {
+			 User user = (User) request.getSession().getAttribute("user");
+			 Integer[] numbers = om.readValue(jb.toString(), Integer[].class); // get the reimb_id numbers
+			 for (Integer number: numbers) {
+				 if(app.equals("0")) {
+					 rei.deny(user, new Reimbursement(number));
+				 } else if (app.equals("1")) {
+					 rei.approve(user, new Reimbursement(number));
+				 }
+			 }
+
+		 } catch (Exception e) {  }
+	}
+
 }

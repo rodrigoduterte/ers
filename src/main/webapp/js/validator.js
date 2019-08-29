@@ -15,20 +15,24 @@ function limitSize(file) {
 }
 
 
-function fieldExists(text) {
-	console.log("textttt   " + text)
-  if (unReg.value.length > 0) {
-    if (text == unReg.value) {
-    	unEx.innerHTML = 'Username already exists'
-    	//unReg.setCustomValidity('Username already exists');
-    }
-  }
-  if (emReg.value.length > 0) {
-    if (text == emReg.value) {
-    	pwEx.innerHTML = 'Email already exists'
-    	//emReg.setCustomValidity('Email already exists');
-    }
-  }
+function fieldExists(text, validating) {
+	if(validating === 'un') {
+		if (text === 'true') {
+			unEx.innerHTML = 'Username already exists'
+			unReg.setCustomValidity('err')
+		} else {
+			unReg.setCustomValidity('')
+			unEx.innerHTML = ''
+		}
+	} else if (validating === 'em') {
+		if (text === 'true') {
+			emEx.innerHTML = 'Email already exists'
+			emReg.setCustomValidity('err')
+		} else {
+			emReg.setCustomValidity('')
+			emEx.innerHTML = ''
+		}
+	}
 }
 
 

@@ -69,9 +69,9 @@ public class Login extends HttpServlet {
 				System.out.println(user);
 				if ( user.getPassword().equals( pwLogin ) ) {
 					if (user.getRole().equals("EMPLOYEE")) {
-						response.sendRedirect("/ers/home?user=1");
+						response.sendRedirect("/ers/home?user=1&fname="+user.getFirstName()+"&lname="+user.getLastName());
 					} else if (user.getRole().equals("FINANCE MANAGER")) {
-						response.sendRedirect("/ers/home?user=2");
+						response.sendRedirect("/ers/home?user=2&fname="+user.getFirstName()+"&lname="+user.getLastName());
 					}
 				} else {
 					request.getRequestDispatcher("html/login.html").forward(request, response);

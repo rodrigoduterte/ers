@@ -11,8 +11,8 @@ usernameInput.addEventListener('keyup', function(ev){
 	let entered = ev.target.value;
 	if(entered) {
 		typingTimer = setTimeout(function() {
-		    inputValueExists('http://localhost:8081/ers/user/info?field=un&un=' + entered)
-		}, 500);
+		    inputValueExists('http://localhost:8081/ers/user/info?field=un&un=' + entered, 'un')
+		}, 200);
 	}
 })
 
@@ -20,8 +20,8 @@ emailInput.addEventListener('keyup', function(ev){
 	let entered = ev.target.value;
 	if(entered) {
 		typingTimer = setTimeout(function() {
-		    inputValueExists('http://localhost:8081/ers/user/info?field=em&em=' + entered)
-		}, 500);
+		    inputValueExists('http://localhost:8081/ers/user/info?field=em&em=' + entered, 'em')
+		}, 200);
 	}
 })
 

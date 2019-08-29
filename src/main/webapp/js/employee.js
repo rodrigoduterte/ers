@@ -15,13 +15,12 @@ let csvBtn = document.getElementById('csv-button');
 let requestHistoryTable = new Tabulator("#request-history-table", {
 	placeholder:"<h1>Table is loading data</h1>",
 	height:"300px",
-    layout:"fitData",
+    layout:"fitColumns",
     layoutColumnsOnNewData:true,
-    dataTreeChildField:"childRows", //look for the child row data array in the childRows field
     columns:[  // i need a query to construct
         {title:"Request Status", field:"status", sorter:"string"},
-        {title:"Date Submitted", field:"created", sorter: "date", sorterParams:{format:"MMM d, yyyy"}},
-        {title:"Date Resolved", field:"resolved", sorter: "date", sorterParams:{format:"MMM d, yyyy"}},
+        {title:"Date Submitted", field:"created", sorter: "date", sorterParams:{format:"MMM d yyyy"}},
+        {title:"Date Resolved", field:"resolved", sorter: "date", sorterParams:{format:"MMM d yyyy"}},
         {title: "Resolved By", field: "resolver.name", sorter: "string"},
         {title:"Description", field:"description", sorter: "string"},
         {title:"Type", field:"type", sorter:"string"},
@@ -29,7 +28,7 @@ let requestHistoryTable = new Tabulator("#request-history-table", {
             decimal:".",
             thousand:",",
             symbol:"$",
-            symbolAfter:"p",
+            symbolBefore:"p",
             precision:false,
         }}
     ]
@@ -81,6 +80,12 @@ editForm.addEventListener("submit", function (ev) {
     ev.preventDefault();
 })
 
+//editForm.addEventListener("change", function () {
+//	if(editForm.reportValidity()){
+//		
+//	}
+//})
+
 // request form
 // reload table on successful submit of request
 requestBtn.addEventListener('click', function() {
@@ -126,13 +131,6 @@ window.onload = function() {
 	getFormDataFromServer("/user/info");
 	tableLoadBytes([requestHistoryTable], '/reqs?n=0', [pdfBtn, csvBtn]);
 }
-
-//document.addEventListener("DOMContentLoaded", function(event) { 
-//	pdfBtn.disabled = true;
-//	csvBtn.disabled = true;
-//	getFormDataFromServer("/user/info");
-//	tableLoad(requestHistoryTable, 'http://localhost:8081/ers/employee/req?all=0')
-//});
 
 function addFormItemToTable(json, table) {
 	table.updateOrAddData(json);

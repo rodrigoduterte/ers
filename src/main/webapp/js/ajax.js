@@ -11,17 +11,25 @@ function preLoad(url) {
     xhttp.send();
 }
 
+function resolvePending(set,url) {
+    var xhttp = new XMLHttpRequest();
+	 sessionStorage.clear();
+     xhttp.open("POST", "http://localhost:8081/ers" + url, true);
+     xhttp.setRequestHeader("Content-type", "application/json");
+	 xhttp.send(  JSON.stringify(  Array.from( set.values() )  )  );
+}
+
 function tableLoadBytes(table, url, buttons) {
 	var xhttp = new XMLHttpRequest();
 
-    xhttp.onreadystatechange = function () {
+	xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            let msgpjo = msgpack.decode( new Uint8Array(xhttp.response));
-            console.log("parsed msgpack" + msgpjo);
-            table.forEach((cv, idx, arr)=> {
-            	arr[idx].updateOrAddData(msgpjo);
-            	arr[idx].redraw(true);
-            })
+            //let msgpjo = msgpack.decode( new Uint8Array(xhttp.response));
+            
+        	let msgpjo = msgpack.decode(new Uint8Array(xhttp.response));
+            console.log(msgpjo);
+            	table.setData(msgpjo);
+            	table.redraw(true);
             buttons.forEach((cv, idx, arr)=> {
             	arr[idx].disabled = false;
             })
@@ -81,22 +89,19 @@ function renderForm(json) {
 }
 
 function endSessionOnCloseTab() {
-	console.log('session close')
 	 var xhttp = new XMLHttpRequest();
 	 sessionStorage.clear();
 	 xhttp.open("POST", "/ers/out", true);
 	 xhttp.send();
 }
 
-function inputValueExists(url) {
+function inputValueExists(url, validating) {
 	let xhttp = new XMLHttpRequest();
 	
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let text = xhttp.responseText;
-            console.log(text);
-            fieldExists(text);
-            //sessionStorage.setItem('fieldValue', text);
+            fieldExists(text, validating);
         }
     };
     

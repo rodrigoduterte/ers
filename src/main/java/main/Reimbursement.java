@@ -10,9 +10,9 @@ import dao.ReimbursementDAOImpl;
 
 public class Reimbursement {
 	protected final static Logger ibis = Logger.getLogger(User.class);
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM-dd-yyyy")
+	@JsonFormat(pattern = "MMM dd yyyy")
 	private Date created;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "MMM-dd-yyyy")
+	@JsonFormat(pattern = "MMM dd yyyy")
 	private Date resolved;
 	private int id;
 	private double ammount;
@@ -23,6 +23,10 @@ public class Reimbursement {
 	private String type;
 	private String status;
 	ReimbursementDAOImpl rdao = new ReimbursementDAOImpl();
+	
+	public Reimbursement(int id) {
+		this.id = id;
+	}
 	
 	public Reimbursement(double ammount, String description, Blob receipt, User author, String type) {
 		/**

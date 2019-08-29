@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.msgpack.jackson.dataformat.MessagePackFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -45,7 +47,7 @@ public class Requesting extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	@SuppressWarnings("null")
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// used for postman purposes
@@ -55,7 +57,11 @@ public class Requesting extends HttpServlet {
 		Map maps = Maps.getQueryMap(request.getQueryString());
 		ArrayList<Reimbursement> reims = new ArrayList<Reimbursement>();
 		String all = (String) maps.get("all");
+		String t = (String) maps.get("t");
 
+		ObjectMapper mapper = new ObjectMapper( new MessagePackFactory());
+		byte[] messagePackBytes = null;
+		
 		if (all.equals("0"))	{
 			reims = redao.getAll(new User(1));
 		} else if (all.equals("1")) {  // load open requests
@@ -63,14 +69,25 @@ public class Requesting extends HttpServlet {
 		} else if (all.equals("2")) {  // load request history
 			reims = redao.getAll();
 		} 
-
-		////// Convert ArrayList of Reimbursements into JSON Array
-		response.setContentType("application/json;charset=UTF-8");
-		ObjectMapper om = new ObjectMapper();
-		PrintWriter out = response.getWriter();
 		
-		out.write(om.writeValueAsString(reims));
-		out.flush();
+		if (t.equals("j")) {
+		////// Convert ArrayList of Reimbursements into JSON Array
+			response.setContentType("application/json;charset=UTF-8");
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			ObjectMapper om = new ObjectMapper();
+			PrintWriter out = response.getWriter();
+			
+			out.write(om.writeValueAsString(reims));
+			out.flush();
+		} else if (t.equals("m")) {
+			OutputStream out = response.getOutputStream();
+			response.setContentType("text/plain");
+			response.setHeader("Access-Control-Allow-Origin", "*");
+			messagePackBytes = mapper.writeValueAsBytes(reims);
+			out.write(messagePackBytes);
+			out.flush();
+		}
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
