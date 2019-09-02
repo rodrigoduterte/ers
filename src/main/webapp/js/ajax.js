@@ -25,7 +25,7 @@ function tableLoadBytes(table, uri, buttons) {
 	xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
         	let msgpjo = msgpack.decode(new Uint8Array(xhttp.response));
-            	table.setData(msgpjo);
+            	table.updateOrAddData(msgpjo);
             	table.redraw(true);
             buttons.forEach((cv, idx, arr)=> {
             	arr[idx].disabled = false;
@@ -39,20 +39,24 @@ function tableLoadBytes(table, uri, buttons) {
 }
 
 function tableLoad(table, uri, buttons) {
-    var xhttp = new XMLHttpRequest();
-    console.log(uri);
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            let json = JSON.parse(xhttp.responseText);
-            table.setData(json);
-            table.redraw(true);
-            buttons.forEach((cv, idx, arr)=> {
-            	arr[idx].disabled = false;
-            })
-        }
-    };
-    xhttp.open("GET", uri, true);
-    xhttp.send();
+	if (uri.includes("type=m")) {
+		tableLoadBytes(table, uri, buttons)
+	} else {
+		var xhttp = new XMLHttpRequest();
+	    console.log(uri);
+	    xhttp.onreadystatechange = function () {
+	        if (this.readyState == 4 && this.status == 200) {
+	            let json = JSON.parse(xhttp.responseText);
+	            table.updateOrAddData(json);
+	            table.redraw(true);
+	            buttons.forEach((cv, idx, arr)=> {
+	            	arr[idx].disabled = false;
+	            })
+	        }
+	    };
+	    xhttp.open("GET", uri, true);
+	    xhttp.send();
+	}
 }
 
 //done
@@ -63,7 +67,6 @@ function getFormDataFromServer(uri) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let json = xhttp.responseText;
-            console.log(json);
             sessionStorage.setItem('editFormObject', json);
             renderForm(json);
         }
@@ -71,7 +74,6 @@ function getFormDataFromServer(uri) {
     xhttp.open("GET", uri, true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send();
-    //return json;
 }
 
 function renderForm(json) {

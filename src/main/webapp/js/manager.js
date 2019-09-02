@@ -2,10 +2,6 @@
 let editForm = document.forms['edit-form'];
 
 let editBtn = document.getElementById('edit-form-button');
-//let pdfBtn1 = document.getElementById('pdf-button-1');
-//let csvBtn1 = document.getElementById('csv-button-1');
-//let pdfBtn2 = document.getElementById('pdf-button-2');
-//let csvBtn2 = document.getElementById('csv-button-2');
 let approveBtn = document.getElementById("approve-button");
 let denyBtn = document.getElementById("deny-button");
 let closeEditBtn = document.getElementById('close-edit-button');
@@ -25,12 +21,14 @@ function printIcon(cell, formatterParams, onRendered){
 let setResolve = new Set();
 
 let pendingTable = new Tabulator('#approval-table', {
+	initialFilter:[
+        {field:"author.name", type:"!=", value:"null"}
+    ],
     index: "id",
 	placeholder:"<h1>Table is loading data</h1>",
 	printAsHtml:true,
 	selectable:true,
     height:"300px",
-    resizableColumns:false,
     layout:"fitColumns",
     virtualDomBuffer:300,
     groupBy:"author.name",
@@ -58,11 +56,13 @@ let pendingTable = new Tabulator('#approval-table', {
 });
 
 let requestHistoryTable = new Tabulator("#request-history-table-manager", {  ///total width 1230
+	initialFilter:[
+        {field:"author.name", type:"!=", value:"null"}
+    ],
     index: "id",
     placeholder:"<h1>Table is loading data</h1>",
     layout:"fitColumns",
     printAsHtml:true,
-    resizableColumns:false,
     height:"300px",
     groupBy:"author.name",
     groupStartOpen:false,
@@ -109,10 +109,9 @@ editBtn.addEventListener('click', function() {
         /// send form json to server via ajax
         let json = JSON.stringify( Object.fromEntries( new FormData(editForm) ) );
         saveFormData(json, "/ers/user/info");
-        console.log(json);
         $('#infoModal').modal('hide')
     } else {
-        console.log('Form not valid')
+    	alert('Values entered are not valid')
     }
 })
 
@@ -122,34 +121,13 @@ closeEditBtn.addEventListener('click', function() {
 	renderForm(formJson);
 })
 
-//csvBtn1.addEventListener('click', function() {
-//	pendingTable.download("csv", "manager.csv", {bom:true});
-//})
-//
-//csvBtn2.addEventListener('click', function() {
-//	requestHistoryTable.download("csv", "manager.csv", {bom:true});
-//})
-//
-//pdfBtn1.addEventListener('click', function() {
-//	pendingTable.print();
-//})
-//
-//pdfBtn2.addEventListener('click', function() {
-//	requestHistoryTable.print();
-//})
 
 window.onload = function() {
 	approveBtn.disabled = true;
 	denyBtn.disabled = true;
-//	pdfBtn1.disabled = true;
-//	csvBtn1.disabled = true;
-//	pdfBtn2.disabled = true;
-//	csvBtn2.disabled = true;
 	getFormDataFromServer("/ers/user/info");
-	tableLoadBytes(pendingTable, "/ers/reqs?n=1&type=m", [approveBtn, denyBtn]);
-	tableLoadBytes(requestHistoryTable, "/ers/reqs?n=2&type=m", []);
-//	tableLoad(pendingTable, "/ers/reqs?n=1&type=j", [approveBtn, denyBtn]);
-//	tableLoad(requestHistoryTable, "/ers/reqs?n=2&type=j", []);
+	tableLoad(pendingTable, "/ers/reqs?n=1&type=m", [approveBtn, denyBtn]);
+	tableLoad(requestHistoryTable, "/ers/reqs?n=2&type=m", []);
 }
 
 //invoke /out when tab is closed

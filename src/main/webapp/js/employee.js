@@ -97,7 +97,6 @@ requestBtn.addEventListener('click', function() {
         /// reset and hide form
         requestForm.reset();
         $('#requestModal').modal('hide');
-        
     } else {
         alert('Values entered are not valid')
     }
@@ -124,8 +123,7 @@ window.onload = function() {
 	pdfBtn.disabled = true;
 	csvBtn.disabled = true;
 	getFormDataFromServer("/ers/user/info");
-	tableLoadBytes(requestHistoryTable, '/ers/reqs?n=0&type=j', [pdfBtn, csvBtn]);
-//	tableLoad(requestHistoryTable, '/ers/reqs?n=0&type=j', [pdfBtn, csvBtn])
+	tableLoad(requestHistoryTable, '/ers/reqs?n=0&type=m', [pdfBtn, csvBtn]);
 }
 
 /// add form to table
