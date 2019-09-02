@@ -11,23 +11,20 @@ function preLoad(url) {
     xhttp.send();
 }
 
-function resolvePending(set,url) {
+function resolvePending(set,uri) {
     var xhttp = new XMLHttpRequest();
 	 sessionStorage.clear();
-     xhttp.open("POST", "http://localhost:8081/ers" + url, true);
+     xhttp.open("POST", uri, true);
      xhttp.setRequestHeader("Content-type", "application/json");
 	 xhttp.send(  JSON.stringify(  Array.from( set.values() )  )  );
 }
 
-function tableLoadBytes(table, url, buttons) {
+function tableLoadBytes(table, uri, buttons) {
 	var xhttp = new XMLHttpRequest();
 
 	xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            //let msgpjo = msgpack.decode( new Uint8Array(xhttp.response));
-            
         	let msgpjo = msgpack.decode(new Uint8Array(xhttp.response));
-            console.log(msgpjo);
             	table.setData(msgpjo);
             	table.redraw(true);
             buttons.forEach((cv, idx, arr)=> {
@@ -35,25 +32,26 @@ function tableLoadBytes(table, url, buttons) {
             })
         }
     };
-    xhttp.open("GET", "http://localhost:8081/ers"+url, true);
+
+    xhttp.open("GET", uri, true);
     xhttp.responseType = "arraybuffer";
     xhttp.send();
 }
 
-
-function tableLoad(table, url) {
+function tableLoad(table, uri, buttons) {
     var xhttp = new XMLHttpRequest();
-
+    console.log(uri);
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             let json = JSON.parse(xhttp.responseText);
-            table.updateOrAddData(json);
+            table.setData(json);
             table.redraw(true);
-            pdfBtn.disabled = false;
-            csvBtn.disabled = false;
+            buttons.forEach((cv, idx, arr)=> {
+            	arr[idx].disabled = false;
+            })
         }
     };
-    xhttp.open("GET", url, true);
+    xhttp.open("GET", uri, true);
     xhttp.send();
 }
 
@@ -64,19 +62,16 @@ function getFormDataFromServer(uri) {
 	
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-//            let jso = JSON.parse(xhttp.responseText);
             let json = xhttp.responseText;
             console.log(json);
             sessionStorage.setItem('editFormObject', json);
             renderForm(json);
         }
     };
-    
-    xhttp.open("GET", "http://localhost:8081/ers"+uri, true);
+    xhttp.open("GET", uri, true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send();
-    console.log("getFormDataFromServer  "+JSON.stringify(json));
-    return json;
+    //return json;
 }
 
 function renderForm(json) {
@@ -111,14 +106,14 @@ function inputValueExists(url, validating) {
 }
 
 function saveFormDataWithFile(formdata) {
-	var xhttp = new XMLHttpRequest();       
-	xhttp.open("POST","/ers/employee/req", true);
+	var xhttp = new XMLHttpRequest();
+	xhttp.open("POST","/ers/reqg", true);
 	xhttp.send(formdata);
 }
 
-function saveFormData(jso, url) {
+function saveFormData(jso, uri) {
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", url, true);
+    xhttp.open("POST", uri, true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.send(jso);
     

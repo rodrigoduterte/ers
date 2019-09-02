@@ -25,18 +25,31 @@ import utility.ds.Maps;
 public class UserInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
 	public UserInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
+	void writeResponse(String toGet, HttpServletRequest request, HttpServletResponse response) throws IOException {
+		PrintWriter out = response.getWriter();
+		UserDAOImpl userdao = new UserDAOImpl();
+		Map maps = Maps.getQueryMap(request.getQueryString());
+		String queryStringvalue = maps.get(toGet).toString();
+		
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		if (toGet.equals("un")) {
+			out.print(  userdao.exists(queryStringvalue)  );
+			out.flush();
+		} else if ( toGet.equals("em") ) {
+			out.print(  userdao.checkEmail(queryStringvalue)  );
+			out.flush();
+		} else if ( toGet.equals("hr") ) {
+			String hrcode = getServletContext().getInitParameter("HRCODE");
+			out.print(  hrcode.equals(queryStringvalue)  );
+		}
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		User user = (User) request.getSession().getAttribute("user");
@@ -55,29 +68,14 @@ public class UserInfo extends HttpServlet {
 			out.print(jo);
 			out.flush();
 		} else if (user == null) { // else if user is trying to know if his/her username and email exist
-			PrintWriter out = response.getWriter();
-			UserDAOImpl userdao = new UserDAOImpl();
 			Map maps = Maps.getQueryMap(request.getQueryString());
-			boolean valueExists;
 
 			if (maps.get("field").equals("un")) {
-				System.out.println("un   " + maps.get("un").toString());
-				valueExists = userdao.exists(maps.get("un").toString());
-				System.out.println(valueExists);
-
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				out.print(valueExists);
-				out.flush();
+				writeResponse("un" ,request , response);
 			} else if (maps.get("field").equals("em")) {
-				System.out.println("un   " + maps.get("em").toString());
-				valueExists = userdao.checkEmail(maps.get("em").toString());
-				System.out.println(valueExists);
-
-				response.setContentType("text/plain");
-				response.setCharacterEncoding("UTF-8");
-				out.print(valueExists);
-				out.flush();
+				writeResponse("em" ,request , response);
+			} else if (maps.get("field").equals("hr")) {
+				writeResponse("hr" ,request , response);
 			}
 		}
 	}
@@ -100,13 +98,10 @@ public class UserInfo extends HttpServlet {
 			while ((line = reader.readLine()) != null) {
 				builder.append(line);
 			}
-
 			data = builder.toString();
 			JSONObject json = new JSONObject(data);
 
 			User user = (User) session.getAttribute("user");
-			System.out.println(user);
-			System.out.println(json);
 			user.changeFirstName(json.getString("fnameReg"));
 			user.changeLastName(json.getString("lnameReg"));
 			user.changeUsername(json.getString("unReg"));
@@ -115,7 +110,6 @@ public class UserInfo extends HttpServlet {
 		} else {
 			String fn = request.getParameter("fnameReg"), ln = request.getParameter("lnameReg");
 			String un = request.getParameter("unReg"), em = request.getParameter("emailReg");
-			String pw = request.getParameter("pwReg");
 
 			User user = new User(un, fn, ln, em, "EMPLOYEE"); // must register an employee in the database before
 																// sending an email

@@ -37,15 +37,18 @@ public class PictureStorage {
 		JFrame jf = new JFrame();
 		FileDialog fd = new FileDialog(jf);
 		fd.setVisible(true);
+		fd.setAlwaysOnTop(false);
+//		fd.toFront();
 		File[] pic = fd.getFiles();
-		if (pic.length > 0) {
-			PutObjectRequest por = new PutObjectRequest("devonvirdenprojects", key, pic[0]);
-			AccessControlList acl = new AccessControlList();
-			acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
-			por.setAccessControlList(acl);
-			s3client.putObject(por);
-		}
-		System.out.println("done");
+		System.out.println(pic[0].getAbsoluteFile());
+//		if (pic.length > 0) {
+//			PutObjectRequest por = new PutObjectRequest("devonvirdenprojects", key, pic[0]);
+//			AccessControlList acl = new AccessControlList();
+//			acl.grantPermission(GroupGrantee.AllUsers, Permission.Read);
+//			por.setAccessControlList(acl);
+//			s3client.putObject(por);
+//		}
+//		System.out.println("done");
 		jf.dispose();
 		fd.dispose();
 		return key;

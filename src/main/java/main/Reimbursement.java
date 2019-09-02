@@ -1,6 +1,5 @@
 package main;
 
-import java.sql.Blob;
 import java.util.Date;
 import org.apache.log4j.Logger;
 
@@ -17,7 +16,7 @@ public class Reimbursement {
 	private int id;
 	private double ammount;
 	private String description;
-	private Blob receipt;
+	private String receipt;
 	private User author;
 	private User resolver;
 	private String type;
@@ -28,7 +27,7 @@ public class Reimbursement {
 		this.id = id;
 	}
 
-	public Reimbursement(double ammount, String description, Blob receipt, User author, String type) {
+	public Reimbursement(double ammount, String description, String receipt, User author, String type) {
 		/**
 		 * Used to Instantiate a newly created ticket and add it to the database
 		 */
@@ -44,7 +43,7 @@ public class Reimbursement {
 				+ "\n\tAmmount: $" + this.ammount + "\n\tType: " + this.type + "\n\tDescription: " + this.description);
 	}
 
-	public Reimbursement(Date created, int id, double ammount, String description, Blob receipt, User author,
+	public Reimbursement(Date created, int id, double ammount, String description, String receipt, User author,
 			String type, String status) {
 		super();
 		this.created = created;
@@ -57,7 +56,7 @@ public class Reimbursement {
 		this.status = status;
 	}
 
-	public Reimbursement(Date created, Date resolved, int id, double ammount, String description, Blob receipt,
+	public Reimbursement(Date created, Date resolved, int id, double ammount, String description, String receipt,
 			User author, User resolver, String type, String status) {
 		super();
 		this.created = created;
@@ -72,6 +71,10 @@ public class Reimbursement {
 		this.status = status;
 	}
 
+	public void setReceipt(String receipt) {
+		this.receipt = receipt;
+	}
+	
 	public Date getCreated() {
 		return created;
 	}
@@ -92,7 +95,7 @@ public class Reimbursement {
 		return description;
 	}
 
-	public Blob getReceipt() {
+	public String getReceipt() {
 		return receipt;
 	}
 

@@ -1,4 +1,6 @@
 /* register a custom validator fields */
+let hrReg = document.getElementById('hr-register');
+let hrInv = document.getElementById('hr-invalid');
 let unReg = document.getElementById('username-register');
 let unEx = document.getElementById('username-exists');
 let emReg = document.getElementById('email-register');
@@ -14,12 +16,11 @@ function limitSize(file) {
     }
 }
 
-
 function fieldExists(text, validating) {
 	if(validating === 'un') {
 		if (text === 'true') {
 			unEx.innerHTML = 'Username already exists'
-			unReg.setCustomValidity('err')
+			unReg.setCustomValidity('Username already exists')
 		} else {
 			unReg.setCustomValidity('')
 			unEx.innerHTML = ''
@@ -27,20 +28,26 @@ function fieldExists(text, validating) {
 	} else if (validating === 'em') {
 		if (text === 'true') {
 			emEx.innerHTML = 'Email already exists'
-			emReg.setCustomValidity('err')
+			emReg.setCustomValidity('Email already exists')
 		} else {
 			emReg.setCustomValidity('')
 			emEx.innerHTML = ''
 		}
+	} else if (validating === 'hr') {
+		if (text === 'false') {
+			hrInv.innerHTML = 'Invalid HR Code'
+			hrReg.setCustomValidity('Invalid HR Code')
+		} else {
+			hrReg.setCustomValidity('')
+			hrInv.innerHTML = ''
+		}
 	}
 }
-
 
 if (unReg != null) {
   hyperform.addValidator(unReg,
     function (element) {
       var re = new RegExp('^[a-zA-Z].*');
-      //element.value.match(re)
       var valid = re.test(element.value);
       element.setCustomValidity(valid ? ''
         : 'Length must be between 5 to 15 characters, '
@@ -65,7 +72,6 @@ if (pwReg != null) {
   hyperform.addValidator(pwReg,
     function (element) {
       var re = new RegExp('^(?=.{5,20})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!]).*$');
-      //element.value.match(re)
       var valid = re.test(element.value);
       element.setCustomValidity(valid ? ''
         : 'Length must be between 5 to 20 characters, '
@@ -80,14 +86,5 @@ if (pwReg != null) {
       cpReg.reportValidity();
     });
 }
-
-
-/*
- * whenever the password field changes, revalidate the confirmation field, too
- */
-
-
-/// custom error messages of each control
-
 
 hyperform(window);

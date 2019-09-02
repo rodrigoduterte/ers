@@ -78,9 +78,9 @@
 					<div id="request-history-table"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="pdf-button">Print
+					<button type="button" class="btn btn-primary pdfbtn" id="pdf-button">Print
 						to PDF</button>
-					<button type="button" class="btn btn-primary" id="csv-button">Save
+					<button type="button" class="btn btn-primary csvbtn" id="csv-button">Save
 						to CSV</button>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 						</div>
 						<div class="form-group">
 							<textarea class="form-control" id="description-request" rows="3"
-								placeholeder="Description" name="description"></textarea>
+								placeholder="Description" name="description" required></textarea>
 						</div>
 						<div class="form-group">
 							<label for="reimb-type">Type of Reimbursement:</label> <select
@@ -128,7 +128,7 @@
 						<div class="form-group">
 							<span>
 							<input id="file-request" type="file" class="form-control"
-								name="fileReq" accept=".pdf" />
+								name="receipt" accept=".jpg, .jpeg, .png" />
 							<div>File Limit: 5MB</div>
 							</span>
 						</div>

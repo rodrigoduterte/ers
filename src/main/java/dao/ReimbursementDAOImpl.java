@@ -28,7 +28,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 			while (res.next()) {
 				reimb = new Reimbursement(res.getDate("reimb_submit"), res.getDate("reimb_resolve"),
 						res.getInt("reimb_id"), res.getDouble("reimb_ammount"), res.getString("reimb_description"),
-						res.getBlob("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
+						res.getString("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
 						udao.getUser(res.getInt("reimb_resolver")), res.getString("reimb_type"),
 						res.getString("reimb_status"));
 			}
@@ -91,7 +91,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 					.prepareStatement("INSERT INTO reimbursement VALUES (0,?,CURRENT_TIMESTAMP,null,?,?,?,null,1,?)");
 			prep.setDouble(1, reimb.getAmmount());
 			prep.setString(2, reimb.getDescription());
-			prep.setBlob(3, reimb.getReceipt());
+			prep.setString(3, reimb.getReceipt());
 			prep.setInt(4, user.getId());
 			switch (reimb.getType()) {
 			case "LODGING":
@@ -171,7 +171,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 			while (res.next()) {
 				reimb.add(new Reimbursement(res.getDate("reimb_submit"), res.getDate("reimb_resolve"),
 						res.getInt("reimb_id"), res.getDouble("reimb_ammount"), res.getString("reimb_description"),
-						res.getBlob("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
+						res.getString("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
 						udao.getUser(res.getInt("reimb_resolver")), res.getString("reimb_type"),
 						res.getString("reimb_status")));
 			}
@@ -199,7 +199,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 			while (res.next()) {
 				reimb.add(new Reimbursement(res.getDate("reimb_submit"), res.getDate("reimb_resolve"),
 						res.getInt("reimb_id"), res.getDouble("reimb_ammount"), res.getString("reimb_description"),
-						res.getBlob("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
+						res.getString("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
 						udao.getUser(res.getInt("reimb_resolver")), res.getString("reimb_type"),
 						res.getString("reimb_status")));
 			}
@@ -226,7 +226,7 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 			while (res.next()) {
 				reimb.add(new Reimbursement(res.getDate("reimb_submit"), res.getInt("reimb_id"),
 						res.getDouble("reimb_ammount"), res.getString("reimb_description"),
-						res.getBlob("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
+						res.getString("reimb_receipt"), udao.getUser(res.getInt("reimb_author")),
 						res.getString("reimb_type"), res.getString("reimb_status")));
 			}
 			prep.cancel();

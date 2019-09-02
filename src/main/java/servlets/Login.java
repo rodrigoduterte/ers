@@ -1,8 +1,6 @@
 package servlets;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,9 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.json.HTTP;
-import org.json.JSONException;
-import org.json.JSONObject;
+import org.apache.log4j.Logger;
 
 import dao.UserDAOImpl;
 import main.User;
@@ -21,6 +17,7 @@ import main.User;
  * Servlet implementation class LoginUser
  */
 public class Login extends HttpServlet {
+	protected final static Logger ibis = Logger.getLogger(Login.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -43,7 +40,6 @@ public class Login extends HttpServlet {
 				response.sendRedirect("/ers/home?user=2");
 			}
 		}
-
 	}
 
 	/**
@@ -71,9 +67,11 @@ public class Login extends HttpServlet {
 					if (user.getRole().equals("EMPLOYEE")) {
 						response.sendRedirect(
 								"/ers/home?user=1&fname=" + user.getFirstName() + "&lname=" + user.getLastName());
+						ibis.info("Employee " + user.getName() + " successfully logged in");
 					} else if (user.getRole().equals("FINANCE MANAGER")) {
 						response.sendRedirect(
 								"/ers/home?user=2&fname=" + user.getFirstName() + "&lname=" + user.getLastName());
+						ibis.info("Finance Manager " + user.getName() + " successfully logged in");
 					}
 				} else {
 					request.getRequestDispatcher("html/login.html").forward(request, response);

@@ -1,17 +1,22 @@
 package utility.ds;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import org.json.JSONObject;
+import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
+import org.msgpack.jackson.dataformat.MessagePackFactory;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.wnameless.json.flattener.JsonFlattener;
 import com.github.wnameless.json.unflattener.JsonUnflattener;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import dao.ReimbursementDAOImpl;
 import main.Reimbursement;
-import main.User;
 
 public class JSON {
 	private JSONObject jo = new JSONObject();
@@ -58,4 +63,22 @@ public class JSON {
 		return gsonBuilder.fromJson(flatTofat(flatjson), clas);
 	}
 
+	
+	public static void sendJSONtoClient(String format, 
+			HttpServletResponse response, ArrayList<Reimbursement> reims) throws IOException {
+		ObjectMapper om;
+		if (format.equals("j")) {
+			response.setContentType("application/json;charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			om = new ObjectMapper();
+			out.write(om.writeValueAsString(reims));
+			out.flush();
+		} else if (format.equals("m")) {
+			response.setContentType("text/plain");
+			OutputStream out = response.getOutputStream();
+			om = new ObjectMapper(new MessagePackFactory());
+			out.write(om.writeValueAsBytes(reims));
+			out.flush();
+		}
+	}
 }

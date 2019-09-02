@@ -15,22 +15,23 @@ let csvBtn = document.getElementById('csv-button');
 let requestHistoryTable = new Tabulator("#request-history-table", {
 	placeholder:"<h1>Table is loading data</h1>",
 	height:"300px",
+	resizableColumns:false,
     layout:"fitColumns",
     layoutColumnsOnNewData:true,
-    columns:[  // i need a query to construct
-        {title:"Request Status", field:"status", sorter:"string"},
-        {title:"Date Submitted", field:"created", sorter: "date", sorterParams:{format:"MMM d yyyy"}},
-        {title:"Date Resolved", field:"resolved", sorter: "date", sorterParams:{format:"MMM d yyyy"}},
-        {title: "Resolved By", field: "resolver.name", sorter: "string"},
-        {title:"Description", field:"description", sorter: "string"},
-        {title:"Type", field:"type", sorter:"string"},
+    columns:[
+        {title:"Status", field:"status", sorter:"string", width: 100},
+        {title:"Date Submitted", field:"created", sorter: "date", sorterParams:{format:"MMM d yyyy"}, width: 170},
+        {title:"Date Resolved", field:"resolved", sorter: "date", sorterParams:{format:"MMM d yyyy"}, width: 170},
+        {title: "Resolved By", field: "resolver.name", sorter: "string", width: 150},
+        {title:"Description", field:"description", sorter: "string", width: 400},
+        {title:"Type", field:"type", sorter:"string", width: 100},
         {title:"Amount", field:"ammount", sorter:"number", formatter:"money", formatterParams:{
             decimal:".",
             thousand:",",
             symbol:"$",
             symbolBefore:"p",
             precision:false,
-        }}
+        }, width: 120}
     ]
 });
 
@@ -39,21 +40,20 @@ fileBtn.addEventListener('change', function(ev) {
 	limitSize(ev.target)
 });
 
-// edit form submission
+/// submit form that has all valid values
 editBtn.addEventListener('click', function() {
     if(editForm.reportValidity()) {
-        /// send form json to server via ajax
+        // end form json to server via ajax
         let json = JSON.stringify( Object.fromEntries( new FormData(editForm) ) );
-        saveFormData(json, "http://localhost:8081/ers/user/info");
-        console.log(json);
+        saveFormData(json, '/ers/user/info');
         $('#infoModal').modal('hide')
     } else {
-        console.log('Form not valid')
+        alert('Values entered are not valid')
     }
 })
 
 // revert to previous form info on click of close button
-// anything typed before clicking close button 
+// anything typed before clicking close button
 // but not edit button is unsaved
 closeEditBtn.addEventListener('click', function() {
 	let formJson = sessionStorage.getItem('editFormObject');
@@ -65,11 +65,11 @@ pdfBtn.addEventListener('click', function() {
 })
 
 csvBtn.addEventListener('click', function() {
-	requestHistoryTable.download("csv", "history_csv.csv", {bom:true});
+	requestHistoryTable.download("csv", "employee.csv", {bom:true});
 })
 
 
-//invoke /out when tab is closed
+// invoke /out when tab is closed
 window.onunload = function() {
 	localStorage.clear();
 	endSessionOnCloseTab();
@@ -80,20 +80,14 @@ editForm.addEventListener("submit", function (ev) {
     ev.preventDefault();
 })
 
-//editForm.addEventListener("change", function () {
-//	if(editForm.reportValidity()){
-//		
-//	}
-//})
-
 // request form
 // reload table on successful submit of request
 requestBtn.addEventListener('click', function() {
     if(requestForm.reportValidity()) {
-        /// send form json to server via ajax
+        /// get form data of requestForm
         let formData = new FormData(requestForm);
         saveFormDataWithFile(formData);
-        /// add attributes to formData
+    	/// add attributes to formData
         formData.append('created', moment().format('MMM D, YYYY'));
         formData.append('status', 'PENDING');
         formData.delete('fileReq');
@@ -103,8 +97,9 @@ requestBtn.addEventListener('click', function() {
         /// reset and hide form
         requestForm.reset();
         $('#requestModal').modal('hide');
+        
     } else {
-        console.log('Form not valid')
+        alert('Values entered are not valid')
     }
 })
 
@@ -118,7 +113,7 @@ exitForm.addEventListener('submit', function(ev) {
 	sessionStorage.clear();
 })
 
-/// input operations
+/// display current date
 let dateRequest = document.getElementById('date-request');
 let today = new Date();
 
@@ -128,10 +123,12 @@ dateRequest.setAttribute("placeholder", today.getMonth() + "/"
 window.onload = function() {
 	pdfBtn.disabled = true;
 	csvBtn.disabled = true;
-	getFormDataFromServer("/user/info");
-	tableLoadBytes([requestHistoryTable], '/reqs?n=0', [pdfBtn, csvBtn]);
+	getFormDataFromServer("/ers/user/info");
+	tableLoadBytes(requestHistoryTable, '/ers/reqs?n=0&type=j', [pdfBtn, csvBtn]);
+//	tableLoad(requestHistoryTable, '/ers/reqs?n=0&type=j', [pdfBtn, csvBtn])
 }
 
+/// add form to table
 function addFormItemToTable(json, table) {
 	table.updateOrAddData(json);
 	table.redraw(true);

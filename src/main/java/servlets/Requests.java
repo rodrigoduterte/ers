@@ -2,21 +2,14 @@ package servlets;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.TreeMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
-import org.msgpack.jackson.dataformat.MessagePackFactory;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.ReimbursementDAOImpl;
@@ -49,11 +42,8 @@ public class Requests extends HttpServlet {
 		User user;
 		Map maps = Maps.getQueryMap(request.getQueryString());
 		HttpSession session = request.getSession();
-		String n = (String) maps.get("n");
+		String n = (String) maps.get("n"); String type = (String) maps.get("type");
 		ArrayList<Reimbursement> reims = new ArrayList<Reimbursement>();
-
-		ObjectMapper mapper = new ObjectMapper(new MessagePackFactory());
-		byte[] messagePackBytes = null;
 
 		if (session != null) {
 			user = (User) session.getAttribute("user");
@@ -69,14 +59,10 @@ public class Requests extends HttpServlet {
 				}
 			}
 
-			try {
-				OutputStream out = response.getOutputStream();
-				response.setContentType("text/plain");
-				messagePackBytes = mapper.writeValueAsBytes(reims);
-				out.write(messagePackBytes);
-				out.flush();
-			} catch (JsonProcessingException e) {
-				e.printStackTrace();
+			if (type.equals("j")) {
+				JSON.sendJSONtoClient("j", response, reims);
+			} else if (type.equals("m")) {
+				JSON.sendJSONtoClient("m", response, reims);
 			}
 		}
 	}
