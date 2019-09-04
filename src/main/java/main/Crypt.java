@@ -63,8 +63,4 @@ class Crypt {
 		}
 		return str;
 	}
-
-	public static void main(String[] args) {
-		System.out.println(Crypt.decryptWord("yklC?:oU_}3@º¤ $~JÀºXb>¾pV??CG~DgqU"));
-	}
 }

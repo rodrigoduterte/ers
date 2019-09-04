@@ -28,10 +28,13 @@ emailInput.addEventListener('keyup', function(ev){
 
 hrInput.addEventListener('keyup', function(ev) {
 	let entered = ev.target.value;
-	console.log(entered);
 	if(entered) {
 		typingTimer = setTimeout(function() {
 		    inputValueExists('/ers/user/info?field=hr&hr=' + entered, 'hr')
 		}, 200);
 	}
 })
+
+function clearForm() {
+	document.getElementById('register-form').reset();
+}

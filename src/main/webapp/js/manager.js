@@ -5,12 +5,14 @@ let editBtn = document.getElementById('edit-form-button');
 let approveBtn = document.getElementById("approve-button");
 let denyBtn = document.getElementById("deny-button");
 let closeEditBtn = document.getElementById('close-edit-button');
+let welcome = document.getElementById('welcome');
 
 let pdfBtns = document.getElementsByClassName('pdfbtn');
 let csvBtns = document.getElementsByClassName('csvbtn');
 
 let urlParams = new URLSearchParams(window.location.search);
 let mapResolve = new Set();
+
 
 /// define functions
 function printIcon(cell, formatterParams, onRendered){
@@ -22,7 +24,7 @@ let setResolve = new Set();
 
 let pendingTable = new Tabulator('#approval-table', {
 	initialFilter:[
-        {field:"author.name", type:"!=", value:"null"}
+        {field:"author", type:"!=", value:null}
     ],
     index: "id",
 	placeholder:"<h1>Table is loading data</h1>",
@@ -43,21 +45,24 @@ let pendingTable = new Tabulator('#approval-table', {
     columns:[
         {title:"Date Submitted", field:"created", sorter:"date", width: 170},
         {title:"Description", field:"description", formatter:"textarea", sorter: "string", width: 400},
+        {title: "Author", field: "author", sorter: "string", width: 150, visible: false}, 
         {title: "Author", field: "author.name", sorter: "string", width: 150, visible: false},
         {title:"Type", field:"type", sorter:"string", width: 100},
         {title:"Amount", field:"ammount", sorter:"number", formatter:"money", formatterParams:{
             decimal:".", thousand:",", symbol:"$ ", symbolBefore:"p",
             precision:false}, width: 120},
         {title: "Receipts", field:"receipt", cellClick: function(e, cell) {
+        	let row = cell.getRow();
         	window.open
         	("https://devonvirdenprojects.s3.us-east-2.amazonaws.com/"+cell.getValue());
+        	row.toggleSelect();
         }, width: 140}
     ]
 });
 
 let requestHistoryTable = new Tabulator("#request-history-table-manager", {  ///total width 1230
 	initialFilter:[
-        {field:"author.name", type:"!=", value:"null"}
+        {field:"author", type:"!=", value:null}
     ],
     index: "id",
     placeholder:"<h1>Table is loading data</h1>",
@@ -71,6 +76,7 @@ let requestHistoryTable = new Tabulator("#request-history-table-manager", {  ///
         {title:"Status", field:"status", sorter:"string", width: 100},
         {title:"Date Submitted", field:"created", sorter:"date", width: 180},
         {title:"Date Resolved", field:"resolved", sorter:"date", width: 180},
+        {title: "Author", field: "author", sorter: "string", width: 150, visible: false}, 
         {title: "Author", field: "author.name", sorter: "string", width: 150, visible: false}, 
         {title: "Resolved By", field: "resolver.name", sorter: "string", width: 150}, 
         {title:"Description", field:"description", sorter:"string", width: 400},
@@ -123,11 +129,12 @@ closeEditBtn.addEventListener('click', function() {
 
 
 window.onload = function() {
+	welcome.innerHTML = "Welcome " + urlParams.get('fname') + " " + urlParams.get('lname');
 	approveBtn.disabled = true;
 	denyBtn.disabled = true;
 	getFormDataFromServer("/ers/user/info");
-	tableLoad(pendingTable, "/ers/reqs?n=1&type=m", [approveBtn, denyBtn]);
-	tableLoad(requestHistoryTable, "/ers/reqs?n=2&type=m", []);
+	tableLoad(pendingTable, "/ers/reqs?n=1&type=m", []);
+	tableLoad(requestHistoryTable, "/ers/reqs?n=2&type=m", [approveBtn, denyBtn]);
 }
 
 //invoke /out when tab is closed

@@ -17,7 +17,7 @@ import main.User;
  * Servlet implementation class LoginUser
  */
 public class Login extends HttpServlet {
-	protected final static Logger ibis = Logger.getLogger(Login.class);
+	//protected final static Logger ibis = Logger.getLogger(Login.class);
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -62,16 +62,17 @@ public class Login extends HttpServlet {
 			if (session.getAttribute("user") == null) {
 				request.getRequestDispatcher("html/login.html").forward(request, response);
 			} else {
-				System.out.println(user);
 				if (user.getPassword().equals(pwLogin)) {
 					if (user.getRole().equals("EMPLOYEE")) {
 						response.sendRedirect(
 								"/ers/home?user=1&fname=" + user.getFirstName() + "&lname=" + user.getLastName());
-						ibis.info("Employee " + user.getName() + " successfully logged in");
+//						ibis.info("Employee " + user.getName() + " successfully logged in");
+						user.logSignIn();
 					} else if (user.getRole().equals("FINANCE MANAGER")) {
 						response.sendRedirect(
 								"/ers/home?user=2&fname=" + user.getFirstName() + "&lname=" + user.getLastName());
-						ibis.info("Finance Manager " + user.getName() + " successfully logged in");
+						//ibis.info("Finance Manager " + user.getName() + " successfully logged in");
+						user.logSignIn();
 					}
 				} else {
 					request.getRequestDispatcher("html/login.html").forward(request, response);

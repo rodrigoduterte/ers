@@ -1,11 +1,16 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import main.User;
+import utility.ds.Maps;
 
 /**
  * Servlet implementation class PageOut
@@ -27,7 +32,9 @@ public class PageOut extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		//System.out.println(request.getQueryString());
+		Map maps = Maps.getQueryMap(request.getQueryString());
+		String lo = maps.get("lo").toString();
 		HttpSession session = request.getSession();
 		response.setHeader("Cache-Control", "no-cache"); // Forces caches to obtain a new copy of the page from the
 															// origin server
@@ -35,10 +42,18 @@ public class PageOut extends HttpServlet {
 		response.setDateHeader("Expires", 0); // Causes the proxy cache to see the page as "stale"
 		response.setHeader("Pragma", "no-cache"); // HTTP 1.0 backward compatibility
 		// session.removeAttribute("user");
-		session.setAttribute("user", null);
-		session.invalidate();
-		request.getRequestDispatcher("html/loggedout.html").forward(request, response);
-		return;
+		if (lo.equals("1")) {
+			User user = (User) session.getAttribute("user");
+			user.logSignOut();
+			session.setAttribute("user", null);
+			session.invalidate();
+			request.getRequestDispatcher("html/loggedout.html").forward(request, response);
+			return;
+		} else if (lo.equals("0")) {
+			request.getRequestDispatcher("html/registered.html").forward(request, response);
+		}
+		
+		
 	}
 
 }

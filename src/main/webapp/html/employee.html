@@ -22,38 +22,39 @@
 </head>
 
 <body>
+	<div class="alert alert-primary" role="alert" id="welcome"></div>
 	<div class="card-deck" id="carddeck">
 		<div class="card bg-success">
 			<div class="card-body" id="history-anchor">
 				<a href="#" data-toggle="modal" data-target="#historyModal">
-					<h5>View Past Tickets</h5> <img
-					src="pics/history.png" class="img-fluid" alt="Sample photo">
+					<h5>View Past Tickets</h5> <img src="pics/history.png"
+					class="img-fluid" alt="Sample photo">
 				</a>
 			</div>
 		</div>
 		<div class="card bg-secondary">
 			<div class="card-body" id="request">
-			<a href="#" data-toggle="modal" data-target="#requestModal">
-					<h5>Reimbursement Request</h5>
-					<img src="pics/submit.png" class="img-fluid" alt="Sample photo">
-			</a>
+				<a href="#" data-toggle="modal" data-target="#requestModal">
+					<h5>Reimbursement Request</h5> <img src="pics/submit.png"
+					class="img-fluid" alt="Sample photo">
+				</a>
 			</div>
 		</div>
 		<div class="card bg-warning">
 			<div class="card-body" id="info">
-			<a href="#" data-toggle="modal" data-target="#infoModal"
-				data-backdrop="static" data-keyboard="false">
-					<h5>Edit My Information</h5>
-					<img src="pics/edit.png" class="img-fluid" alt="Sample photo">
-			</a>
+				<a href="#" data-toggle="modal" data-target="#infoModal"
+					data-backdrop="static" data-keyboard="false">
+					<h5>Edit My Information</h5> <img src="pics/edit.png"
+					class="img-fluid" alt="Sample photo">
+				</a>
 			</div>
 		</div>
 		<div class="card bg-danger">
 			<div class="card-body" id="logout">
-			<a href="#" data-toggle="modal" data-target="#logOutModal">
-					<h5>Log out</h5>
-					<img src="pics/edit.png" class="img-fluid" alt="Sample photo">
-			</a>
+				<a href="#" data-toggle="modal" data-target="#logOutModal">
+					<h5>Log out</h5> <img src="pics/edit.png" class="img-fluid"
+					alt="Sample photo">
+				</a>
 			</div>
 		</div>
 	</div>
@@ -78,10 +79,10 @@
 					<div id="request-history-table"></div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary pdfbtn" id="pdf-button">Print
-						to PDF</button>
-					<button type="button" class="btn btn-primary csvbtn" id="csv-button">Save
-						to CSV</button>
+					<button type="button" class="btn btn-primary pdfbtn"
+						id="pdf-button">Print to PDF</button>
+					<button type="button" class="btn btn-primary csvbtn"
+						id="csv-button">Save to CSV</button>
 				</div>
 			</div>
 		</div>
@@ -126,10 +127,9 @@
 							<!-- 								oninvalid="setCustomValidity('Please type amount of at least $10.00')"> -->
 						</div>
 						<div class="form-group">
-							<span>
-							<input id="file-request" type="file" class="form-control"
-								name="receipt" accept=".jpg, .jpeg, .png" />
-							<div>File Limit: 5MB</div>
+							<span> <input id="file-request" type="file"
+								class="form-control" name="receipt" accept=".jpg, .jpeg, .png" />
+								<div>File Limit: 5MB</div>
 							</span>
 						</div>
 						<div class="form-group">
@@ -210,7 +210,7 @@
 						sure you want to log out?</h5>
 				</div>
 				<div class="modal-footer">
-					<form action="/ers/out" method="POST" id="exit-form">
+					<form action="/ers/out?lo=1" method="POST" id="exit-form">
 						<input type="submit" class="btn btn-primary" id="exit-button"
 							value="Yes">
 					</form>
@@ -244,7 +244,7 @@
 		integrity="sha384-NaWTHo/8YCBYJ59830LTz/P4aQZK1sS0SneOgAvhsIl3zBu8r9RevNg5lHCHAuQ/"
 		crossorigin="anonymous"></script>
 	<script src="https://unpkg.com/jspdf@latest/dist/jspdf.min.js"></script>
-<!-- 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script> -->
+	<!-- 	<script src="https://sdk.amazonaws.com/js/aws-sdk-2.283.1.min.js"></script> -->
 	<script
 		src="https://rawgit.com/kawanet/msgpack-lite/master/dist/msgpack.min.js"></script>
 	<script src="https://momentjs.com/downloads/moment.js"></script>

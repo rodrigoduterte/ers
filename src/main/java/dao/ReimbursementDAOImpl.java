@@ -290,9 +290,4 @@ public class ReimbursementDAOImpl implements ReimbursementDAO {// {
 			e.printStackTrace();
 		}
 	}
-
-	public static void main(String[] args) {
-		ReimbursementDAOImpl rei = new ReimbursementDAOImpl();
-		System.out.println(rei.getAll(new User(1)));
-	}
 }

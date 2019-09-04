@@ -90,7 +90,7 @@ public class UserInfo extends HttpServlet {
 		UserDAOImpl userdao = new UserDAOImpl();
 		HttpSession session = request.getSession();
 
-		if (session != null) { //
+		if (session.getAttribute("user") != null) { //
 			String data = "";
 			StringBuilder builder = new StringBuilder();
 			BufferedReader reader = request.getReader();
@@ -99,6 +99,7 @@ public class UserInfo extends HttpServlet {
 				builder.append(line);
 			}
 			data = builder.toString();
+			System.out.println(data);
 			JSONObject json = new JSONObject(data);
 
 			User user = (User) session.getAttribute("user");
@@ -110,11 +111,9 @@ public class UserInfo extends HttpServlet {
 		} else {
 			String fn = request.getParameter("fnameReg"), ln = request.getParameter("lnameReg");
 			String un = request.getParameter("unReg"), em = request.getParameter("emailReg");
-
-			User user = new User(un, fn, ln, em, "EMPLOYEE"); // must register an employee in the database before
-																// sending an email
-			userdao.create(user); // save employee to database
-			request.getRequestDispatcher("/ers/out").forward(request, response);
+			
+			new User(un, fn, ln, em, "EMPLOYEE"); // registers to database and sends an employee a temporary password
+			request.getRequestDispatcher("/out?lo=0").forward(request, response);
 		}
 
 	}

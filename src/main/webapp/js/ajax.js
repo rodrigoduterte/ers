@@ -25,7 +25,9 @@ function tableLoadBytes(table, uri, buttons) {
 	xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
         	let msgpjo = msgpack.decode(new Uint8Array(xhttp.response));
+        	console.log(JSON.stringify(msgpjo))
             	table.updateOrAddData(msgpjo);
+            	table.setFilter("author", "!=", null);
             	table.redraw(true);
             buttons.forEach((cv, idx, arr)=> {
             	arr[idx].disabled = false;
